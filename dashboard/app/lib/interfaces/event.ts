@@ -4,3 +4,8 @@ export interface TEvent {
   startTime: string;
   endTime: string;
 }
+
+export interface TEventsResponse {
+  result: TEvent[];
+  totalPage: number;
+}
