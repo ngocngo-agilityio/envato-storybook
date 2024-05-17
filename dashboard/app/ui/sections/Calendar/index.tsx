@@ -1,25 +1,43 @@
 'use client';
 
 // Libs
-import { useMemo } from 'react';
-import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
+import { useCallback, useMemo } from 'react';
+import { Box, Flex, Grid, GridItem, useToast } from '@chakra-ui/react';
 import { InView } from 'react-intersection-observer';
 import dynamic from 'next/dynamic';
 import moment from 'moment';
 
 // Hooks
-import { useGetEvents } from '@/lib/hooks';
+import { useAddEvent, useGetEvents } from '@/lib/hooks';
+
+// Store
+import { authStore } from '@/lib/stores';
+
+// Types
+import { TEvent } from '@/lib/interfaces';
 
 // Components
 import { Indicator } from '@/ui/components';
+import { customToast } from '@/lib/utils';
+import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
 
 // dynamic loading components
 const Calendar = dynamic(() => import('@/ui/components/Calendar'));
 const CardPayment = dynamic(() => import('@/ui/components/CardPayment'));
 
 const CalendarSection = () => {
+  const toast = useToast();
+
+  // Auth Store
+  const { user } = authStore();
+
   // Fetch events
   const { data: events = [], isLoading: isLoadingEvents } = useGetEvents();
+
+  // Add event
+  const { isAddProduct, addEvent } = useAddEvent();
+
+  const { id: userId = '' } = user || {};
 
   const formattedEvents = useMemo(
     () =>
@@ -29,21 +47,53 @@ const CalendarSection = () => {
         return {
           ...event,
           title: eventName,
-          startTime: moment(startTime).toDate(),
-          endTime: moment(endTime).toDate(),
+          start: moment(startTime).toDate(),
+          end: moment(endTime).toDate(),
         };
       }),
     [events],
   );
 
-  // TODO: Update later
-  const handleAddEvent = () => {};
+  const handleAddEventSuccess = useCallback(() => {
+    toast(
+      customToast(
+        SUCCESS_MESSAGES.CREATE_EVENT_SUCCESS.title,
+        SUCCESS_MESSAGES.CREATE_EVENT_SUCCESS.description,
+        STATUS.SUCCESS,
+      ),
+    );
+  }, [toast]);
+
+  const handleAddEventError = useCallback(() => {
+    toast(
+      customToast(
+        ERROR_MESSAGES.CREATE_EVENT_FAIL.title,
+        ERROR_MESSAGES.CREATE_EVENT_FAIL.description,
+        STATUS.ERROR,
+      ),
+    );
+  }, [toast]);
+
+  const handleAddEvent = useCallback(
+    (data: Omit<TEvent, '_id'>) => {
+      const payload = {
+        ...data,
+        userId,
+      };
+
+      addEvent(payload, {
+        onSuccess: handleAddEventSuccess,
+        onError: handleAddEventError,
+      });
+    },
+    [addEvent, handleAddEventError, handleAddEventSuccess, userId],
+  );
 
   // TODO: Update later
   const handleUpdateEvent = () => {};
 
   return (
-    <Indicator isOpen={isLoadingEvents}>
+    <Indicator isOpen={isLoadingEvents || isAddProduct}>
       <Grid
         bg="background.body.primary"
         py={12}

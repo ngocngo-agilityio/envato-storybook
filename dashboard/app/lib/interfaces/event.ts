@@ -5,7 +5,13 @@ export interface TEvent {
   endTime: string;
 }
 
-export interface TEventsResponse {
-  result: TEvent[];
+export type TEventsResponse = {
+  result: (TEvent & { userId: string })[];
   totalPage: number;
-}
+};
+
+export type AddEventPayload = Omit<TEvent, '_id'> & {
+  userId: string;
+};
+
+export type AddEventResponse = TEvent & { userId: string };
