@@ -9,18 +9,24 @@ import {
   Views,
   SlotInfo,
   CalendarProps as BigCalendarProps,
+  Event,
 } from 'react-big-calendar';
 import isEqual from 'react-fast-compare';
 import moment from 'moment';
 
 // Components
-import { CustomToolBar, EventForm } from '@/ui/components';
+import { CustomToolBar, EventForm, EventDetails } from '@/ui/components';
 
 // Types
 import { TEvent } from '@/lib/interfaces';
 
 // Constants
-import { DATE_FORMAT, TIME_FORMAT_HH_MM } from '@/lib/constants';
+import {
+  DATE_FORMAT,
+  MONTH_DATE_FORMAT,
+  TIME_FORMAT_12H,
+  TIME_FORMAT_HH_MM,
+} from '@/lib/constants';
 
 // Styles
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -51,10 +57,43 @@ const CalendarComponent = ({
 }: CalendarProps) => {
   const [date, setDate] = useState(new Date());
   const [view, setView] = useState<ViewType>(Views.MONTH);
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenEventFormModal, setIsOpenEventFormModal] = useState(false);
+  const [isOpenEventDetailModal, setIsOpenEventDetailModal] = useState(false);
   const [slot, setSlot] = useState<Slot>();
+  const [selectedEvent, setSelectedEvent] = useState<Event & Partial<TEvent>>();
 
+  const {
+    _id: selectedEventId = '',
+    start: selectedEventStart = '',
+    end: selectedEventEnd = '',
+    eventName: selectedEventTitle = '',
+  } = selectedEvent || {};
   const { start: startSlot = '', end: endSlot = '' } = slot || {};
+
+  const formattedSelectedEventDate = useMemo(
+    () => moment(selectedEventStart).format(MONTH_DATE_FORMAT),
+    [selectedEventStart],
+  );
+
+  const formattedSelectedEventStart = useMemo(
+    () => moment(selectedEventStart).format(TIME_FORMAT_12H),
+    [selectedEventStart],
+  );
+
+  const formattedSelectedEventEnd = useMemo(
+    () => moment(selectedEventEnd).format(TIME_FORMAT_12H),
+    [selectedEventEnd],
+  );
+
+  const selectedEventTime = useMemo(
+    () =>
+      `${formattedSelectedEventDate} ${formattedSelectedEventStart} – ${formattedSelectedEventEnd}`,
+    [
+      formattedSelectedEventDate,
+      formattedSelectedEventEnd,
+      formattedSelectedEventStart,
+    ],
+  );
 
   const slotDate = useMemo(
     () => moment(startSlot).format(DATE_FORMAT),
@@ -71,8 +110,8 @@ const CalendarComponent = ({
     [endSlot],
   );
 
-  const handleToggleModal = useCallback(
-    () => setIsOpenModal((prev) => !prev),
+  const handleToggleEventFormModal = useCallback(
+    () => setIsOpenEventFormModal((prev) => !prev),
     [],
   );
 
@@ -94,10 +133,20 @@ const CalendarComponent = ({
         end: slotInfo.end,
       }));
 
-      handleToggleModal();
+      handleToggleEventFormModal();
     },
-    [handleToggleModal],
+    [handleToggleEventFormModal],
   );
+
+  const handleToggleEventDetailsModal = useCallback(
+    () => setIsOpenEventDetailModal((prev) => !prev),
+    [],
+  );
+
+  const handleSelectEvent = useCallback((event: Event) => {
+    setSelectedEvent(event);
+    setIsOpenEventDetailModal(true);
+  }, []);
 
   return (
     <>
@@ -115,22 +164,41 @@ const CalendarComponent = ({
         views={[Views.MONTH, Views.WEEK, Views.DAY]}
         onView={handleView}
         onSelectSlot={handleSelectSlot}
+        onSelectEvent={handleSelectEvent}
         components={{ toolbar: CustomToolBar }}
         selectable
       />
-      {isOpenModal && (
+      {isOpenEventFormModal && (
         <Modal
-          isOpen={isOpenModal}
-          onClose={handleToggleModal}
+          isOpen={isOpenEventFormModal}
+          onClose={handleToggleEventFormModal}
           title="Add Event"
           body={
             <EventForm
-              onCloseModal={handleToggleModal}
+              onCancel={handleToggleEventFormModal}
               date={slotDate}
               startTime={slotStartTime}
               endTime={slotEndTime}
               onAddEvent={onAddEvent}
               onEditEvent={onEditEvent}
+            />
+          }
+          haveCloseButton
+        />
+      )}
+
+      {isOpenEventDetailModal && (
+        <Modal
+          isOpen={isOpenEventDetailModal}
+          onClose={handleToggleEventDetailsModal}
+          title="Event Information"
+          body={
+            <EventDetails
+              id={selectedEventId}
+              title={selectedEventTitle}
+              time={selectedEventTime}
+              onEdit={handleToggleEventFormModal}
+              onCancel={handleToggleEventDetailsModal}
             />
           }
           haveCloseButton

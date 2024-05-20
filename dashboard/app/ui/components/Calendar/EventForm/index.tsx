@@ -24,7 +24,7 @@ interface AddEventFormProps {
   date?: string;
   startTime?: string;
   endTime?: string;
-  onCloseModal: () => void;
+  onCancel: () => void;
   onAddEvent?: (data: Omit<TEvent, '_id'>) => void;
   onEditEvent?: (data: TEvent) => void;
 }
@@ -35,7 +35,7 @@ const EventFormComponent = ({
   date = '',
   startTime = '',
   endTime = '',
-  onCloseModal,
+  onCancel,
   onAddEvent,
   onEditEvent,
 }: AddEventFormProps) => {
@@ -80,9 +80,9 @@ const EventFormComponent = ({
         : onEditEvent && onEditEvent(requestData);
 
       reset(requestData);
-      onCloseModal();
+      onCancel();
     },
-    [onAddEvent, onCloseModal, onEditEvent, reset],
+    [onAddEvent, onCancel, onEditEvent, reset],
   );
 
   return (
@@ -188,7 +188,7 @@ const EventFormComponent = ({
           w={44}
           bg="orange.300"
           _hover={{ bg: 'orange.400' }}
-          onClick={onCloseModal}
+          onClick={onCancel}
         >
           Cancel
         </Button>
