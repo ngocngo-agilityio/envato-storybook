@@ -102,6 +102,10 @@ export const ERROR_MESSAGES = {
     title: 'Create failed',
     description: 'Your event has been created failed',
   },
+  UPDATE_EVENT_FAIL: {
+    title: 'Update failed',
+    description: 'Your event has been updated failed',
+  },
 };
 
 export const SUCCESS_MESSAGES = {
@@ -168,6 +172,10 @@ export const SUCCESS_MESSAGES = {
   CREATE_EVENT_SUCCESS: {
     title: 'Created success',
     description: 'Your event has been created successfully',
+  },
+  UPDATE_EVENT_SUCCESS: {
+    title: 'Update success',
+    description: 'Your event has been updated successfully',
   },
 };
 

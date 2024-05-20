@@ -65,10 +65,11 @@ const CalendarComponent = ({
 
   const {
     _id: selectedEventId = '',
-    start: selectedEventStart = '',
-    end: selectedEventEnd = '',
+    startTime: selectedEventStart = '',
+    endTime: selectedEventEnd = '',
     eventName: selectedEventTitle = '',
   } = selectedEvent || {};
+
   const { start: startSlot = '', end: endSlot = '' } = slot || {};
 
   const formattedSelectedEventDate = useMemo(
