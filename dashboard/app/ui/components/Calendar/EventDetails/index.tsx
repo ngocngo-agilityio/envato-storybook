@@ -32,8 +32,18 @@ const EventDetailComponent = ({
         <Text>{time}</Text>
 
         <Flex gap={3}>
-          <EditIcon w={5} h={5} onClick={handleClickEdit} />
-          <DeleteIcon w={5} h={5} onClick={handleOpenConfirmModal} />
+          <EditIcon
+            w={5}
+            h={5}
+            onClick={handleClickEdit}
+            style={{ cursor: 'pointer' }}
+          />
+          <DeleteIcon
+            w={5}
+            h={5}
+            onClick={handleOpenConfirmModal}
+            style={{ cursor: 'pointer' }}
+          />
         </Flex>
       </Flex>
 
