@@ -33,6 +33,9 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 // Lazy loading components
 const Modal = dynamic(() => import('@/ui/components/common/Modal'));
+const ConfirmDeleteModal = dynamic(
+  () => import('@/ui/components/common/Table/Body/ConfirmDeleteModal'),
+);
 
 type ViewType = 'month' | 'week' | 'work_week' | 'day' | 'agenda';
 
@@ -60,6 +63,7 @@ const CalendarComponent = ({
   const [isAddEvent, setIsAddEvent] = useState(true);
   const [isOpenEventFormModal, setIsOpenEventFormModal] = useState(false);
   const [isOpenEventDetailModal, setIsOpenEventDetailModal] = useState(false);
+  const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
   const [slot, setSlot] = useState<Slot>();
   const [selectedEvent, setSelectedEvent] = useState<Event & Partial<TEvent>>();
 
@@ -216,6 +220,22 @@ const CalendarComponent = ({
               time={selectedEventTime}
               onEdit={handleToggleEventFormModal}
               onCancel={handleToggleEventDetailsModal}
+            />
+          }
+          haveCloseButton
+        />
+      )}
+
+      {isOpenConfirmModal && (
+        <Modal
+          isOpen={isOpenConfirmModal}
+          onClose={handleToggleConfirmModal}
+          title="Delete Event"
+          body={
+            <ConfirmDeleteModal
+              itemName="ddd"
+              onDeleteProduct={() => {}}
+              onCloseModal={handleToggleConfirmModal}
             />
           }
           haveCloseButton
