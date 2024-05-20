@@ -121,16 +121,24 @@ export const useUpdateEvent = () => {
           const { data } = oldData || {};
           const { result: events = [] } = data || {};
 
-          const updatedEvents = events.map((item) =>
-            item._id === variables.eventId
+          const updatedEvents = events.map((item) => {
+            const { _id: itemId = '' } = item || {};
+            const {
+              eventId = '',
+              eventName = '',
+              startTime = '',
+              endTime = '',
+            } = variables || {};
+
+            return itemId === eventId
               ? {
                   ...item,
-                  eventName: variables.eventName,
-                  startTime: variables.startTime,
-                  endTime: variables.endTime,
+                  eventName,
+                  startTime,
+                  endTime,
                 }
-              : item,
-          );
+              : item;
+          });
 
           const updatedData = {
             ...data,

@@ -97,24 +97,29 @@ const CalendarComponent = ({
     ],
   );
 
-  const eventDate = useMemo(
-    () =>
-      moment(isAddEvent ? startSlot : selectedEventStart).format(DATE_FORMAT),
+  const startEvent = useMemo(
+    () => (isAddEvent ? startSlot : selectedEventStart),
     [isAddEvent, selectedEventStart, startSlot],
+  );
+
+  const endEvent = useMemo(
+    () => (isAddEvent ? endSlot : selectedEventEnd),
+    [endSlot, isAddEvent, selectedEventEnd],
+  );
+
+  const eventDate = useMemo(
+    () => moment(startEvent).format(DATE_FORMAT),
+    [startEvent],
   );
 
   const eventStartTime = useMemo(
-    () =>
-      moment(isAddEvent ? startSlot : selectedEventStart).format(
-        TIME_FORMAT_HH_MM,
-      ),
-    [isAddEvent, selectedEventStart, startSlot],
+    () => moment(startEvent).format(TIME_FORMAT_HH_MM),
+    [startEvent],
   );
 
   const eventEndTime = useMemo(
-    () =>
-      moment(isAddEvent ? endSlot : selectedEventEnd).format(TIME_FORMAT_HH_MM),
-    [endSlot, isAddEvent, selectedEventEnd],
+    () => moment(endEvent).format(TIME_FORMAT_HH_MM),
+    [endEvent],
   );
 
   const handleToggleEventDetailsModal = useCallback(
@@ -182,7 +187,7 @@ const CalendarComponent = ({
         <Modal
           isOpen={isOpenEventFormModal}
           onClose={handleToggleEventFormModal}
-          title={isAddEvent ? 'Add Event' : 'Update Event'}
+          title={`${isAddEvent ? 'Add' : 'Update'} Event`}
           body={
             <EventForm
               onCancel={handleToggleEventFormModal}
