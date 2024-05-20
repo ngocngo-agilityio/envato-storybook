@@ -5,6 +5,8 @@ export const getCurrentYear = (): number => {
   return currentYear;
 };
 
+export const getCurrentDate = (): string => new Date().toJSON().slice(0, 10);
+
 export const getCurrentTimeSeconds = (): number => Date.now() / 1000;
 
 /**

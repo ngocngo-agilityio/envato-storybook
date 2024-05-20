@@ -29,6 +29,7 @@ export const ERROR_MESSAGES = {
   INVALID_TRANSFER_AMOUNT: 'Amount is invalid',
   LIMIT_TRANSFER_AMOUNT: 'Amount cannot exceed $999,999',
   END_TIME_EVENT: 'Event must end after it starts',
+  MIN_DATE: 'Date must be today or later',
   SET_PIN_CODE: {
     title: 'Set PIN code failed',
     description:

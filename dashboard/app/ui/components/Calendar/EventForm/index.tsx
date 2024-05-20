@@ -126,7 +126,6 @@ const EventFormComponent = ({
               {...rest}
               label="Date"
               type="date"
-              min={new Date().toJSON().slice(0, 10)}
               variant="authentication"
               bg="background.body.primary"
               isError={!!error}
