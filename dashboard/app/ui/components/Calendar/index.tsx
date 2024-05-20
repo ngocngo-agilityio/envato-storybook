@@ -57,6 +57,7 @@ const CalendarComponent = ({
 }: CalendarProps) => {
   const [date, setDate] = useState(new Date());
   const [view, setView] = useState<ViewType>(Views.MONTH);
+  const [isAddEvent, setIsAddEvent] = useState(true);
   const [isOpenEventFormModal, setIsOpenEventFormModal] = useState(false);
   const [isOpenEventDetailModal, setIsOpenEventDetailModal] = useState(false);
   const [slot, setSlot] = useState<Slot>();
@@ -95,25 +96,35 @@ const CalendarComponent = ({
     ],
   );
 
-  const slotDate = useMemo(
-    () => moment(startSlot).format(DATE_FORMAT),
-    [startSlot],
+  const eventDate = useMemo(
+    () =>
+      moment(isAddEvent ? startSlot : selectedEventStart).format(DATE_FORMAT),
+    [isAddEvent, selectedEventStart, startSlot],
   );
 
-  const slotStartTime = useMemo(
-    () => moment(startSlot).format(TIME_FORMAT_HH_MM),
-    [startSlot],
+  const eventStartTime = useMemo(
+    () =>
+      moment(isAddEvent ? startSlot : selectedEventStart).format(
+        TIME_FORMAT_HH_MM,
+      ),
+    [isAddEvent, selectedEventStart, startSlot],
   );
 
-  const slotEndTime = useMemo(
-    () => moment(endSlot).format(TIME_FORMAT_HH_MM),
-    [endSlot],
+  const eventEndTime = useMemo(
+    () =>
+      moment(isAddEvent ? endSlot : selectedEventEnd).format(TIME_FORMAT_HH_MM),
+    [endSlot, isAddEvent, selectedEventEnd],
   );
 
-  const handleToggleEventFormModal = useCallback(
-    () => setIsOpenEventFormModal((prev) => !prev),
+  const handleToggleEventDetailsModal = useCallback(
+    () => setIsOpenEventDetailModal((prev) => !prev),
     [],
   );
+
+  const handleToggleEventFormModal = useCallback(() => {
+    setIsOpenEventDetailModal(false);
+    setIsOpenEventFormModal((prev) => !prev);
+  }, []);
 
   const handleNavigate = useCallback(
     (newDate: Date) => setDate(newDate),
@@ -127,23 +138,21 @@ const CalendarComponent = ({
 
   const handleSelectSlot = useCallback(
     (slotInfo: SlotInfo) => {
+      setIsAddEvent(true);
       setSlot((prev) => ({
         ...prev,
         start: slotInfo.start,
         end: slotInfo.end,
       }));
 
+      setIsOpenEventDetailModal(false);
       handleToggleEventFormModal();
     },
     [handleToggleEventFormModal],
   );
 
-  const handleToggleEventDetailsModal = useCallback(
-    () => setIsOpenEventDetailModal((prev) => !prev),
-    [],
-  );
-
   const handleSelectEvent = useCallback((event: Event) => {
+    setIsAddEvent(false);
     setSelectedEvent(event);
     setIsOpenEventDetailModal(true);
   }, []);
@@ -172,13 +181,15 @@ const CalendarComponent = ({
         <Modal
           isOpen={isOpenEventFormModal}
           onClose={handleToggleEventFormModal}
-          title="Add Event"
+          title={isAddEvent ? 'Add Event' : 'Update Event'}
           body={
             <EventForm
               onCancel={handleToggleEventFormModal}
-              date={slotDate}
-              startTime={slotStartTime}
-              endTime={slotEndTime}
+              id={!isAddEvent ? selectedEventId : ''}
+              eventName={!isAddEvent ? selectedEventTitle : ''}
+              date={eventDate}
+              startTime={eventStartTime}
+              endTime={eventEndTime}
               onAddEvent={onAddEvent}
               onEditEvent={onEditEvent}
             />
