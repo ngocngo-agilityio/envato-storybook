@@ -195,8 +195,8 @@ const CalendarSection = () => {
                   as="section"
                   bgColor="background.component.primary"
                   borderRadius={8}
-                  px={10}
-                  py={5}
+                  px={{ base: 4, md: 10 }}
+                  py={{ base: 4, md: 5 }}
                 >
                   <Calendar
                     events={formattedEvents}
