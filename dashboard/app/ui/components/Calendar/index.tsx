@@ -47,15 +47,16 @@ interface Slot {
 const localizer = momentLocalizer(moment);
 
 type CalendarProps = Omit<BigCalendarProps, 'localizer'> & {
-  onAddEvent?: (data: Omit<TEvent, '_id'>) => void;
-  onEditEvent?: (data: TEvent) => void;
-  onDeleteEvent?: (id: string) => void;
+  onAddEvent: (data: Omit<TEvent, '_id'>) => void;
+  onEditEvent: (data: TEvent) => void;
+  onDeleteEvent: (id: string) => void;
 };
 
 const CalendarComponent = ({
   events = [],
   onAddEvent,
   onEditEvent,
+  onDeleteEvent,
   ...rest
 }: CalendarProps) => {
   const [date, setDate] = useState(new Date());
@@ -167,6 +168,16 @@ const CalendarComponent = ({
     setIsOpenEventDetailModal(true);
   }, []);
 
+  const handleToggleConfirmModal = useCallback(() => {
+    setIsOpenEventDetailModal(false);
+    setIsOpenConfirmModal((prev) => !prev);
+  }, []);
+
+  const handleDeleteEvent = useCallback(() => {
+    onDeleteEvent(selectedEventId);
+    handleToggleConfirmModal();
+  }, [handleToggleConfirmModal, onDeleteEvent, selectedEventId]);
+
   return (
     <>
       <BigCalendar
@@ -219,6 +230,7 @@ const CalendarComponent = ({
               title={selectedEventTitle}
               time={selectedEventTime}
               onEdit={handleToggleEventFormModal}
+              onDelete={handleToggleConfirmModal}
               onCancel={handleToggleEventDetailsModal}
             />
           }
@@ -233,8 +245,8 @@ const CalendarComponent = ({
           title="Delete Event"
           body={
             <ConfirmDeleteModal
-              itemName="ddd"
-              onDeleteProduct={() => {}}
+              itemName={selectedEventTitle}
+              onDeleteProduct={handleDeleteEvent}
               onCloseModal={handleToggleConfirmModal}
             />
           }
