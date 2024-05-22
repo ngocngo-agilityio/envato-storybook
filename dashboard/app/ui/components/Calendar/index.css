@@ -7,25 +7,32 @@
   font-weight: 600;
   font-size: 20px;
   line-height: 28px;
-  color: #22c55e;
+  color: var(--c-calendar-m-header-title);
   border: none !important;
 }
 
 .rbc-month-header {
   padding-top: 20px;
   border-width: 0;
-  border-top: 1px solid light-dark(#e4f2ff, #2a313c);
+  border-top: 1px solid
+    light-dark(
+      var(--c--calendar-m-header-border-light),
+      var(--c-calendar-m-header-border-dark)
+    );
   margin-bottom: 30px;
 }
 
 .rbc-month-header .rbc-header:first-child {
-  color: #ff4747;
+  color: var(--c-calendar-m-header-first-title);
 }
 
 .rbc-month-row .rbc-date-cell {
   font-size: 18px;
   line-height: 18px;
-  color: light-dark(#2f3032, #ffffff);
+  color: light-dark(
+    var(--c-calendar-m-cell-light),
+    var(--c-calendar-m-cell-dark)
+  );
   background: transparent;
   border: none !important;
   text-align: center;
@@ -33,24 +40,20 @@
 
 .rbc-month-row .rbc-date-cell:first-child,
 .rbc-date-cell:last-child {
-  color: #ff4747;
+  color: var(--c-calendar-m-first-last-column-cell);
 }
 
 .rbc-month-row .rbc-off-range.rbc-date-cell {
-  color: #c0c0c0;
-}
-
-.rbc-month-row .rbc-off-range.rbc-date-cell {
-  color: #c0c0c0;
+  color: var(--c-calendar-m-off-range-cell);
 }
 
 .rbc-month-row .rbc-off-range.rbc-date-cell:first-child,
 .rbc-off-range.rbc-date-cell:last-child {
-  color: #ffc7c7;
+  color: var(--c-calendar-m-first-last-column-off-range-cell);
 }
 
 .rbc-month-row .rbc-now.rbc-date-cell {
-  color: #22c55e;
+  color: var(--c-calendar-m-today-cell);
 }
 
 .rbc-month-row .rbc-off-range-bg {
@@ -63,29 +66,27 @@
 
 .rbc-month-row .rbc-button-link:hover {
   text-decoration: underline;
-  text-decoration-color: light-dark(#2f3032, #ffffff);
+  text-decoration-color: light-dark(
+    var(--c-calendar-m-cell-light),
+    var(--c-calendar-m-cell-dark)
+  );
 }
 
 .rbc-month-row .rbc-off-range .rbc-button-link:hover {
   text-decoration: underline;
-  text-decoration-color: #c0c0c0;
+  text-decoration-color: var(--c-calendar-m-off-range-cell);
 }
 
 .rbc-month-row .rbc-date-cell:first-child .rbc-button-link:hover,
 .rbc-month-row .rbc-date-cell:last-child .rbc-button-link:hover {
   text-decoration: underline;
-  text-decoration-color: #ff4747;
+  text-decoration-color: var(--c-calendar-m-first-last-column-cell);
 }
 
 .rbc-month-row .rbc-off-range:first-child .rbc-button-link:hover,
 .rbc-month-row .rbc-off-range:last-child .rbc-button-link:hover {
   text-decoration: underline;
-  text-decoration-color: #ffc7c7;
-}
-
-.rbc-month-row .rbc-off-range .rbc-button-link:hover {
-  text-decoration: underline;
-  text-decoration-color: #c0c0c0;
+  text-decoration-color: var(--c-calendar-m-first-last-column-off-range-cell);
 }
 
 .rbc-month-row .rbc-today {
@@ -101,12 +102,18 @@
   font-size: 14px;
   line-height: 24px;
   font-weight: 700;
-  color: light-dark(#000, #fff);
+  color: light-dark(
+    var(--c-calendar-m-event-light),
+    var(--c-calendar-m-event-dark)
+  );
   background-color: transparent;
 }
 
 .rbc-month-view .rbc-event:hover {
-  background-color: light-dark(#f5f5f5, #1a1b20);
+  background-color: light-dark(
+    var(--c-calendar-m-event-hover-light),
+    var(--c-calendar-m-event-hover-dark)
+  );
 }
 
 .rbc-month-view .rbc-event-content::before {
@@ -115,14 +122,15 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #f5ba47;
+  background-color: var(--bg-calendar-m-event-dot);
   margin-right: 6px;
 }
 
 /* Week view */
 .rbc-events-container .rbc-event {
-  background-color: #f5ba47;
-  border-color: #ffffff;
+  background-color: var(--bg-calendar-w-event);
+  border-color: var(--c-calendar-w-event-border);
+  min-height: 50px !important;
 }
 
 .rbc-time-view .rbc-event .rbc-event-label {
