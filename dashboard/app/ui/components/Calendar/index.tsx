@@ -28,14 +28,15 @@ import {
   TIME_FORMAT_HH_MM,
 } from '@/lib/constants';
 
-// Styles
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-
 // Lazy loading components
 const Modal = dynamic(() => import('@/ui/components/common/Modal'));
 const ConfirmDeleteModal = dynamic(
   () => import('@/ui/components/common/Table/Body/ConfirmDeleteModal'),
 );
+
+// Styles
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import './index.css';
 
 type ViewType = 'month' | 'week' | 'work_week' | 'day' | 'agenda';
 
@@ -186,7 +187,6 @@ const CalendarComponent = ({
         events={events}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: '50vh' }}
         date={date}
         onNavigate={handleNavigate}
         defaultView={Views.MONTH}
