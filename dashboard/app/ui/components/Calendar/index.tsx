@@ -3,6 +3,8 @@
 // Libs
 import dynamic from 'next/dynamic';
 import { useCallback, useMemo, useState, memo } from 'react';
+import { CloseButton, Flex, Heading } from '@chakra-ui/react';
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import {
   Calendar as BigCalendar,
   momentLocalizer,
@@ -27,6 +29,9 @@ import {
   TIME_FORMAT_12H,
   TIME_FORMAT_HH_MM,
 } from '@/lib/constants';
+
+// Themes
+import { useColorfill } from '@/ui/themes/bases/colors';
 
 // Lazy loading components
 const Modal = dynamic(() => import('@/ui/components/common/Modal'));
@@ -68,6 +73,8 @@ const CalendarComponent = ({
   const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
   const [slot, setSlot] = useState<Slot>();
   const [selectedEvent, setSelectedEvent] = useState<Event & Partial<TEvent>>();
+
+  const { septenary } = useColorfill();
 
   const {
     _id: selectedEventId = '',
@@ -179,6 +186,42 @@ const CalendarComponent = ({
     handleToggleConfirmModal();
   }, [handleToggleConfirmModal, onDeleteEvent, selectedEventId]);
 
+  const eventDetailsModalsHeader = useMemo(
+    () => (
+      <Flex flex={1} justifyContent="space-between" alignItems="center">
+        <Heading fontWeight="semibold">Event Details</Heading>
+        <Flex flex={1} justifyContent="flex-end" alignItems="center" gap={3}>
+          <EditIcon
+            color={septenary}
+            w={5}
+            h={5}
+            onClick={handleToggleEventFormModal}
+            style={{ cursor: 'pointer' }}
+          />
+          <DeleteIcon
+            color={septenary}
+            w={5}
+            h={5}
+            onClick={handleToggleConfirmModal}
+            style={{ cursor: 'pointer' }}
+          />
+          <CloseButton
+            color={septenary}
+            size="lg"
+            onClick={handleToggleEventDetailsModal}
+            style={{ cursor: 'pointer' }}
+          />
+        </Flex>
+      </Flex>
+    ),
+    [
+      handleToggleConfirmModal,
+      handleToggleEventDetailsModal,
+      handleToggleEventFormModal,
+      septenary,
+    ],
+  );
+
   return (
     <>
       <BigCalendar
@@ -223,18 +266,11 @@ const CalendarComponent = ({
         <Modal
           isOpen={isOpenEventDetailModal}
           onClose={handleToggleEventDetailsModal}
-          title="Event Information"
+          title={eventDetailsModalsHeader}
           body={
-            <EventDetails
-              id={selectedEventId}
-              title={selectedEventTitle}
-              time={selectedEventTime}
-              onEdit={handleToggleEventFormModal}
-              onDelete={handleToggleConfirmModal}
-              onCancel={handleToggleEventDetailsModal}
-            />
+            <EventDetails title={selectedEventTitle} time={selectedEventTime} />
           }
-          haveCloseButton
+          haveCloseButton={false}
         />
       )}
 
