@@ -8,12 +8,7 @@ import dynamic from 'next/dynamic';
 import moment from 'moment';
 
 // Hooks
-import {
-  useAddEvent,
-  useGetEvents,
-  useUpdateEvent,
-  useDeleteEvent,
-} from '@/lib/hooks';
+import { useEvents } from '@/lib/hooks';
 
 // Store
 import { authStore } from '@/lib/stores';
@@ -40,17 +35,17 @@ const CalendarSection = () => {
   // Auth Store
   const { user } = authStore();
 
-  // Fetch events
-  const { data: events = [], isLoading: isLoadingEvents } = useGetEvents();
-
-  // Add event
-  const { isAddEvent, addEvent } = useAddEvent();
-
-  // Update event
-  const { isUpdateEvent, updateEvent } = useUpdateEvent();
-
-  // Delete Event
-  const { deleteEvent, isDeleteEvent } = useDeleteEvent();
+  // Events
+  const {
+    data: events = [],
+    isLoading: isLoadingEvents,
+    isAddEvent,
+    addEvent,
+    isUpdateEvent,
+    updateEvent,
+    isDeleteEvent,
+    deleteEvent,
+  } = useEvents();
 
   const { id: userId = '' } = user || {};
 
