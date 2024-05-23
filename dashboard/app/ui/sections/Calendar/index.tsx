@@ -5,7 +5,7 @@ import { useCallback, useMemo } from 'react';
 import { Box, Flex, Grid, GridItem, useToast } from '@chakra-ui/react';
 import { InView } from 'react-intersection-observer';
 import dynamic from 'next/dynamic';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 // Hooks
 import { useEvents } from '@/lib/hooks';
@@ -57,8 +57,8 @@ const CalendarSection = () => {
         return {
           ...event,
           title: eventName,
-          start: moment(startTime).toDate(),
-          end: moment(endTime).toDate(),
+          start: dayjs(startTime).toDate(),
+          end: dayjs(endTime).toDate(),
         };
       }),
     [events],
