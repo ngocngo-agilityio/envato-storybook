@@ -1,5 +1,7 @@
 // Libs
 import { AxiosRequestHeaders, AxiosResponse } from 'axios';
+import { Event } from 'react-big-calendar';
+import dayjs from 'dayjs';
 
 // Types
 import {
@@ -68,3 +70,18 @@ export const MOCK_DELETE_EVENT_PAYLOAD: DeleteEventPayload = {
   eventId: MOCK_EVENTS[1]._id,
   userId: '6593beacff649fc6c4d2964c',
 };
+
+export const MOCK_FORMATTED_EVENTS: (Event & Pick<TEvent, '_id'>)[] = [
+  {
+    _id: '664576b910c4c653733941c1',
+    title: 'Event 1',
+    start: dayjs('2024-05-16 14:30').toDate(),
+    end: dayjs('2024-05-16 15:30').toDate(),
+  },
+  {
+    _id: '664576b910c4c653733941c2',
+    title: 'Event 2',
+    start: dayjs('2024-05-25 10:30').toDate(),
+    end: dayjs('2024-05-25 11:30').toDate(),
+  },
+];
