@@ -17,8 +17,13 @@ const mockProps = {
 const { render } = testLibReactUtils;
 
 describe('EventForm component', () => {
+  beforeEach(() => {
+    jest.useFakeTimers({ now: new Date('2024-05-01') });
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
+    jest.useRealTimers();
   });
 
   it('EventForm component renders correctly', () => {
@@ -27,7 +32,7 @@ describe('EventForm component', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('should show the required error messages correctly', () => {
+  it('should show the required error messages correctly', async () => {
     const { getByText, getByRole, getByLabelText } = render(
       <EventForm onCancel={mockProps.onCancel} />,
     );
@@ -37,7 +42,7 @@ describe('EventForm component', () => {
     });
     fireEvent.click(getByRole('button', { name: 'Save' }));
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(
         getByText(ERROR_MESSAGES.FIELD_REQUIRED('Date')),
       ).toBeInTheDocument();
@@ -46,11 +51,13 @@ describe('EventForm component', () => {
         getByText(ERROR_MESSAGES.FIELD_REQUIRED('Start time')),
       ).toBeInTheDocument();
 
-      expect(ERROR_MESSAGES.FIELD_REQUIRED('End time')).toBeInTheDocument();
+      expect(
+        getByText(ERROR_MESSAGES.FIELD_REQUIRED('End time')),
+      ).toBeInTheDocument();
     });
   });
 
-  it('should show error message if the end time is less than the start time', () => {
+  it('should show error message if the end time is less than the start time', async () => {
     const { getByText, getByRole, getByLabelText } = render(
       <EventForm {...mockProps} endTime="08:00" />,
     );
@@ -60,12 +67,12 @@ describe('EventForm component', () => {
     });
     fireEvent.click(getByRole('button', { name: 'Save' }));
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(getByText(ERROR_MESSAGES.END_TIME_EVENT)).toBeInTheDocument();
     });
   });
 
-  it('should call onAddEvent when submit form without id ', () => {
+  it('should call onAddEvent when submit form without id ', async () => {
     const { getByRole, getByLabelText } = render(<EventForm {...mockProps} />);
 
     fireEvent.change(getByLabelText('Date'), {
@@ -73,12 +80,12 @@ describe('EventForm component', () => {
     });
     fireEvent.click(getByRole('button', { name: 'Save' }));
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(mockProps.onAddEvent).toHaveBeenCalled();
     });
   });
 
-  it('should call onEditEvent when submit form with id ', () => {
+  it('should call onEditEvent when submit form with id ', async () => {
     const { getByRole, getByLabelText } = render(
       <EventForm {...mockProps} id="1" />,
     );
@@ -88,7 +95,7 @@ describe('EventForm component', () => {
     });
     fireEvent.click(getByRole('button', { name: 'Save' }));
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(mockProps.onEditEvent).toHaveBeenCalled();
     });
   });
