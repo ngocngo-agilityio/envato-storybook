@@ -85,3 +85,7 @@ export const MOCK_FORMATTED_EVENTS: (Event & Pick<TEvent, '_id'>)[] = [
     end: dayjs('2024-05-25 11:30').toDate(),
   },
 ];
+
+export const MOCK_UPDATE_EVENT_FORM = {
+  title: 'Update title',
+};
