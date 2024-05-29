@@ -86,8 +86,16 @@ export const MOCK_FORMATTED_EVENTS: (Event & Pick<TEvent, '_id'>)[] = [
   },
 ];
 
+export const MOCK_EVENT_FORM_DATA = {
+  title: 'Event 1',
+  date: '2024-05-27',
+  startTime: '10:00',
+  endTime: '11:00',
+};
+
 export const MOCK_UPDATE_EVENT_FORM = {
   title: 'Update title',
+  date: '2024-05-28',
 };
 
 export const MOCK_CALENDAR_NOW_DATE = new Date('2024-05-01');
