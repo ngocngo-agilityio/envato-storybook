@@ -8,7 +8,11 @@ import { customToast, renderQueryProviderTest } from '@/lib/utils';
 import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
 
 // Mocks
-import { MOCK_EVENTS, MOCK_UPDATE_EVENT_FORM } from '@/lib/mocks';
+import {
+  MOCK_CALENDAR_NOW_DATE,
+  MOCK_EVENTS,
+  MOCK_UPDATE_EVENT_FORM,
+} from '@/lib/mocks';
 
 // Sections
 import { Calendar } from '@/ui/sections';
@@ -38,7 +42,7 @@ jest.mock('@/lib/utils', () => ({
 
 describe('Calendar section', () => {
   beforeEach(() => {
-    jest.useFakeTimers({ now: new Date('2024-05-01') });
+    jest.useFakeTimers({ now: MOCK_CALENDAR_NOW_DATE });
   });
 
   afterEach(() => {
