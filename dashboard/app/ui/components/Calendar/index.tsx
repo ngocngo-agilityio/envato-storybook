@@ -63,7 +63,7 @@ type CalendarProps = Omit<BigCalendarProps, 'localizer'> & {
 };
 
 const Calendar = ({
-  events = [],
+  events,
   date,
   onAddEvent,
   onEditEvent,

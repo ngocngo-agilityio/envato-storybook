@@ -53,7 +53,7 @@ const CalendarSection = () => {
   const formattedEvents = useMemo(
     () =>
       events.map((event) => {
-        const { eventName = '', startTime = '', endTime = '' } = event || {};
+        const { eventName = '', startTime, endTime } = event || {};
 
         return {
           ...event,
