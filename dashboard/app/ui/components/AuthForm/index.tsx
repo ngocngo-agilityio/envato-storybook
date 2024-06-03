@@ -53,9 +53,7 @@ interface AuthFormProps {
   isRegister?: boolean;
 }
 
-const AuthFormComponent = ({
-  isRegister = false,
-}: AuthFormProps): JSX.Element => {
+const AuthForm = ({ isRegister = false }: AuthFormProps): JSX.Element => {
   const { signIn, signUp } = useAuth();
   const router = useRouter();
 
@@ -498,6 +496,6 @@ const AuthFormComponent = ({
   );
 };
 
-const AuthForm = memo(AuthFormComponent);
+const AuthFormMemorized = memo(AuthForm);
 
-export default AuthForm;
+export default AuthFormMemorized;
