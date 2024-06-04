@@ -23,10 +23,10 @@ import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
 import { customToast } from '@/lib/utils';
 
 // dynamic loading components
-const CalendarComponent = dynamic(() => import('@/ui/components/Calendar'));
+const Calendar = dynamic(() => import('@/ui/components/Calendar'));
 const CardPayment = dynamic(() => import('@/ui/components/CardPayment'));
 
-const Calendar = () => {
+const CalendarSection = () => {
   const toast = useToast();
   const [date, setDate] = useState(new Date());
 
@@ -206,7 +206,7 @@ const Calendar = () => {
                 px={{ base: 4, md: 10 }}
                 py={{ base: 4, md: 5 }}
               >
-                <CalendarComponent
+                <Calendar
                   events={formattedEvents}
                   date={date}
                   isLoading={isLoading}
@@ -238,4 +238,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default CalendarSection;
