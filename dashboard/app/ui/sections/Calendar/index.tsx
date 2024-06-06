@@ -2,7 +2,7 @@
 
 // Libs
 import { useCallback, useMemo, useState } from 'react';
-import { Box, Flex, Grid, GridItem, useToast } from '@chakra-ui/react';
+import { Box, Grid, GridItem, useToast } from '@chakra-ui/react';
 import { InView } from 'react-intersection-observer';
 import dynamic from 'next/dynamic';
 import dayjs from 'dayjs';
@@ -22,8 +22,10 @@ import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
 // Utils
 import { customToast } from '@/lib/utils';
 
+// Components
+import { Calendar } from '@/ui/components';
+
 // dynamic loading components
-const Calendar = dynamic(() => import('@/ui/components/Calendar'));
 const CardPayment = dynamic(() => import('@/ui/components/CardPayment'));
 
 const CalendarSection = () => {
@@ -195,42 +197,30 @@ const CalendarSection = () => {
       display={{ sm: 'block', md: 'grid' }}
       gap={{ base: 0, '2xl': 12 }}
     >
-      <InView>
-        {({ inView, ref }) => (
-          <GridItem colSpan={3} ref={ref}>
-            {inView && (
-              <Box
-                as="section"
-                bgColor="background.component.primary"
-                borderRadius={8}
-                px={{ base: 4, md: 10 }}
-                py={{ base: 4, md: 5 }}
-              >
-                <Calendar
-                  events={formattedEvents}
-                  date={date}
-                  isLoading={isLoading}
-                  onSetDate={setDate}
-                  onAddEvent={handleAddEvent}
-                  onEditEvent={handleUpdateEvent}
-                  onDeleteEvent={handleDeleteEvent}
-                />
-              </Box>
-            )}
-          </GridItem>
-        )}
-      </InView>
+      <GridItem colSpan={3}>
+        <Box
+          as="section"
+          bgColor="background.component.primary"
+          borderRadius={8}
+          px={{ base: 4, md: 10 }}
+          py={{ base: 4, md: 5 }}
+        >
+          <Calendar
+            events={formattedEvents}
+            date={date}
+            isLoading={isLoading}
+            onSetDate={setDate}
+            onAddEvent={handleAddEvent}
+            onEditEvent={handleUpdateEvent}
+            onDeleteEvent={handleDeleteEvent}
+          />
+        </Box>
+      </GridItem>
+
       <InView>
         {({ inView, ref }) => (
           <GridItem mt={{ base: 6, '2xl': 0 }} ref={ref}>
-            {inView && (
-              <Flex
-                direction={{ base: 'column', lg: 'row', xl: 'column' }}
-                gap={6}
-              >
-                <CardPayment />
-              </Flex>
-            )}
+            {inView && <CardPayment />}
           </GridItem>
         )}
       </InView>
