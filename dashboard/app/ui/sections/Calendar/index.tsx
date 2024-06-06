@@ -10,9 +10,6 @@ import dayjs from 'dayjs';
 // Hooks
 import { useEvents } from '@/lib/hooks';
 
-// Store
-import { authStore } from '@/lib/stores';
-
 // Types
 import { TEvent } from '@/lib/interfaces';
 
@@ -32,9 +29,6 @@ const CalendarSection = () => {
   const toast = useToast();
   const [date, setDate] = useState(new Date());
 
-  // Auth Store
-  const { user } = authStore();
-
   // Events
   const {
     data: events = [],
@@ -47,7 +41,6 @@ const CalendarSection = () => {
     deleteEvent,
   } = useEvents();
 
-  const { id: userId = '' } = user || {};
   const isLoading =
     isLoadingEvents || isAddEvent || isUpdateEvent || isDeleteEvent;
 
@@ -96,17 +89,12 @@ const CalendarSection = () => {
       const { startTime } = data;
       const eventDate = new Date(startTime);
 
-      const payload = {
-        ...data,
-        userId,
-      };
-
-      addEvent(payload, {
+      addEvent(data, {
         onSuccess: () => handleAddEventSuccess(eventDate),
         onError: handleAddEventError,
       });
     },
-    [addEvent, handleAddEventError, handleAddEventSuccess, userId],
+    [addEvent, handleAddEventError, handleAddEventSuccess],
   );
 
   const handleUpdateEventSuccess = useCallback(
@@ -141,7 +129,6 @@ const CalendarSection = () => {
 
       const payload = {
         ...data,
-        userId,
         eventId: data._id,
       };
 
@@ -150,7 +137,7 @@ const CalendarSection = () => {
         onError: handleUpdateEventError,
       });
     },
-    [handleUpdateEventError, handleUpdateEventSuccess, updateEvent, userId],
+    [handleUpdateEventError, handleUpdateEventSuccess, updateEvent],
   );
 
   const handleDeleteEventSuccess = useCallback(() => {
@@ -176,7 +163,6 @@ const CalendarSection = () => {
   const handleDeleteEvent = useCallback(
     (eventId: string) => {
       const payload = {
-        userId,
         eventId,
       };
 
@@ -185,7 +171,7 @@ const CalendarSection = () => {
         onError: handleDeleteEventError,
       });
     },
-    [deleteEvent, handleDeleteEventError, handleDeleteEventSuccess, userId],
+    [deleteEvent, handleDeleteEventError, handleDeleteEventSuccess],
   );
 
   return (
