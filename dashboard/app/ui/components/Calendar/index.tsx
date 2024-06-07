@@ -75,8 +75,7 @@ const Calendar = ({
   ...rest
 }: CalendarProps) => {
   const [view, setView] = useState<ViewType>(Views.MONTH);
-  const [isAddEvent, setIsAddEvent] = useState(true);
-  const [slot, setSlot] = useState<Slot>();
+  const [slot, setSlot] = useState<Slot | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<Event & Partial<TEvent>>();
 
   const { isOpen: isOpenEventFormModal, onToggle: onToggleEventFormModal } =
@@ -125,13 +124,13 @@ const Calendar = ({
   );
 
   const startEvent = useMemo(
-    () => (isAddEvent ? startSlot : selectedEventStart),
-    [isAddEvent, selectedEventStart, startSlot],
+    () => startSlot || selectedEventStart,
+    [selectedEventStart, startSlot],
   );
 
   const endEvent = useMemo(
-    () => (isAddEvent ? endSlot : selectedEventEnd),
-    [endSlot, isAddEvent, selectedEventEnd],
+    () => endSlot || selectedEventEnd,
+    [endSlot, selectedEventEnd],
   );
 
   const eventDate = useMemo(
@@ -151,12 +150,13 @@ const Calendar = ({
 
   const handleSelectSlot = useCallback(
     (slotInfo: SlotInfo) => {
-      setIsAddEvent(true);
       setSlot((prev) => ({
         ...prev,
         start: slotInfo.start,
         end: slotInfo.end,
       }));
+
+      // Open the Add event form modal
       onToggleEventFormModal();
     },
     [onToggleEventFormModal],
@@ -167,10 +167,24 @@ const Calendar = ({
     onToggleEventFormModal();
   }, [onToggleEventDetailsModal, onToggleEventFormModal]);
 
+  const handleAddEvent = useCallback(
+    (data: Omit<TEvent, '_id'>) => {
+      onAddEvent(data);
+      setSlot(null);
+    },
+    [onAddEvent],
+  );
+
+  const handleCloseEventFormModal = useCallback(() => {
+    onToggleEventFormModal();
+    setSlot(null);
+  }, [onToggleEventFormModal]);
+
   const handleSelectEvent = useCallback(
     (event: Event) => {
-      setIsAddEvent(false);
       setSelectedEvent(event);
+
+      // Open the Event Details modal
       onToggleEventDetailsModal();
     },
     [onToggleEventDetailsModal],
@@ -183,6 +197,8 @@ const Calendar = ({
 
   const handleDeleteEvent = useCallback(() => {
     onDeleteEvent(selectedEventId);
+
+    // Close the Confirm Delete modal
     onToggleConfirmModal();
   }, [onDeleteEvent, selectedEventId, onToggleConfirmModal]);
 
@@ -247,17 +263,19 @@ const Calendar = ({
       {isOpenEventFormModal && (
         <Modal
           isOpen={isOpenEventFormModal}
-          onClose={onToggleEventFormModal}
-          title={`${isAddEvent ? 'Add' : 'Update'} Event`}
+          onClose={handleCloseEventFormModal}
+          title={`${slot ? 'Add' : 'Update'} Event`}
           body={
             <EventForm
-              onCancel={onToggleEventFormModal}
-              id={!isAddEvent ? selectedEventId : ''}
-              eventName={!isAddEvent ? selectedEventTitle : ''}
+              {...(!slot && {
+                id: selectedEventId,
+                eventName: selectedEventTitle,
+              })}
+              onCancel={handleCloseEventFormModal}
               date={eventDate}
               startTime={eventStartTime}
               endTime={eventEndTime}
-              onAddEvent={onAddEvent}
+              onAddEvent={handleAddEvent}
               onEditEvent={onEditEvent}
             />
           }
