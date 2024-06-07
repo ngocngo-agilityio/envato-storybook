@@ -267,9 +267,11 @@ const Calendar = ({
           title={`${slot ? 'Add' : 'Update'} Event`}
           body={
             <EventForm
+              {...(!slot && {
+                id: selectedEventId,
+                eventName: selectedEventTitle,
+              })}
               onCancel={handleCloseEventFormModal}
-              id={!slot ? selectedEventId : ''}
-              eventName={!slot ? selectedEventTitle : ''}
               date={eventDate}
               startTime={eventStartTime}
               endTime={eventEndTime}
