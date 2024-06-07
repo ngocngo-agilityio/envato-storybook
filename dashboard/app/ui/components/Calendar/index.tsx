@@ -3,7 +3,7 @@
 // Libs
 import dynamic from 'next/dynamic';
 import { useCallback, useMemo, useState, memo } from 'react';
-import { CloseButton, Flex, Heading } from '@chakra-ui/react';
+import { CloseButton, Flex, Heading, useDisclosure } from '@chakra-ui/react';
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import {
   Calendar as BigCalendar,
@@ -76,12 +76,17 @@ const Calendar = ({
 }: CalendarProps) => {
   const [view, setView] = useState<ViewType>(Views.MONTH);
   const [isAddEvent, setIsAddEvent] = useState(true);
-  const [isOpenEventFormModal, setIsOpenEventFormModal] = useState(false);
-  const [isOpenEventDetailModal, setIsOpenEventDetailModal] = useState(false);
-  const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
   const [slot, setSlot] = useState<Slot>();
   const [selectedEvent, setSelectedEvent] = useState<Event & Partial<TEvent>>();
 
+  const { isOpen: isOpenEventFormModal, onToggle: onToggleEventFormModal } =
+    useDisclosure();
+  const {
+    isOpen: isOpenEventDetailModal,
+    onToggle: onToggleEventDetailsModal,
+  } = useDisclosure();
+  const { isOpen: isOpenConfirmModal, onToggle: onToggleConfirmModal } =
+    useDisclosure();
   const { septenary } = useColorfill();
 
   const {
@@ -144,16 +149,6 @@ const Calendar = ({
     [endEvent],
   );
 
-  const handleToggleEventDetailsModal = useCallback(
-    () => setIsOpenEventDetailModal((prev) => !prev),
-    [],
-  );
-
-  const handleToggleEventFormModal = useCallback(() => {
-    setIsOpenEventDetailModal(false);
-    setIsOpenEventFormModal((prev) => !prev);
-  }, []);
-
   const handleSelectSlot = useCallback(
     (slotInfo: SlotInfo) => {
       setIsAddEvent(true);
@@ -162,28 +157,34 @@ const Calendar = ({
         start: slotInfo.start,
         end: slotInfo.end,
       }));
-
-      setIsOpenEventDetailModal(false);
-      handleToggleEventFormModal();
+      onToggleEventFormModal();
     },
-    [handleToggleEventFormModal],
+    [onToggleEventFormModal],
   );
 
-  const handleSelectEvent = useCallback((event: Event) => {
-    setIsAddEvent(false);
-    setSelectedEvent(event);
-    setIsOpenEventDetailModal(true);
-  }, []);
+  const handleOpenEventFormModal = useCallback(() => {
+    onToggleEventDetailsModal();
+    onToggleEventFormModal();
+  }, [onToggleEventDetailsModal, onToggleEventFormModal]);
 
-  const handleToggleConfirmModal = useCallback(() => {
-    setIsOpenEventDetailModal(false);
-    setIsOpenConfirmModal((prev) => !prev);
-  }, []);
+  const handleSelectEvent = useCallback(
+    (event: Event) => {
+      setIsAddEvent(false);
+      setSelectedEvent(event);
+      onToggleEventDetailsModal();
+    },
+    [onToggleEventDetailsModal],
+  );
+
+  const handleOpenConfirmModal = useCallback(() => {
+    onToggleEventDetailsModal();
+    onToggleConfirmModal();
+  }, [onToggleConfirmModal, onToggleEventDetailsModal]);
 
   const handleDeleteEvent = useCallback(() => {
     onDeleteEvent(selectedEventId);
-    handleToggleConfirmModal();
-  }, [handleToggleConfirmModal, onDeleteEvent, selectedEventId]);
+    onToggleConfirmModal();
+  }, [onDeleteEvent, selectedEventId, onToggleConfirmModal]);
 
   const eventDetailsModalsHeader = useMemo(
     () => (
@@ -194,7 +195,7 @@ const Calendar = ({
             color={septenary}
             w={5}
             h={5}
-            onClick={handleToggleEventFormModal}
+            onClick={handleOpenEventFormModal}
             style={{ cursor: 'pointer' }}
             data-testid="edit-icon"
           />
@@ -202,14 +203,14 @@ const Calendar = ({
             color={septenary}
             w={5}
             h={5}
-            onClick={handleToggleConfirmModal}
+            onClick={handleOpenConfirmModal}
             style={{ cursor: 'pointer' }}
             data-testid="delete-icon"
           />
           <CloseButton
             color={septenary}
             size="lg"
-            onClick={handleToggleEventDetailsModal}
+            onClick={onToggleEventDetailsModal}
             style={{ cursor: 'pointer' }}
             data-testid="close-icon"
           />
@@ -217,10 +218,10 @@ const Calendar = ({
       </Flex>
     ),
     [
-      handleToggleConfirmModal,
-      handleToggleEventDetailsModal,
-      handleToggleEventFormModal,
       septenary,
+      handleOpenEventFormModal,
+      handleOpenConfirmModal,
+      onToggleEventDetailsModal,
     ],
   );
 
@@ -246,11 +247,11 @@ const Calendar = ({
       {isOpenEventFormModal && (
         <Modal
           isOpen={isOpenEventFormModal}
-          onClose={handleToggleEventFormModal}
+          onClose={onToggleEventFormModal}
           title={`${isAddEvent ? 'Add' : 'Update'} Event`}
           body={
             <EventForm
-              onCancel={handleToggleEventFormModal}
+              onCancel={onToggleEventFormModal}
               id={!isAddEvent ? selectedEventId : ''}
               eventName={!isAddEvent ? selectedEventTitle : ''}
               date={eventDate}
@@ -267,7 +268,7 @@ const Calendar = ({
       {isOpenEventDetailModal && (
         <Modal
           isOpen={isOpenEventDetailModal}
-          onClose={handleToggleEventDetailsModal}
+          onClose={onToggleEventDetailsModal}
           title={eventDetailsModalsHeader}
           body={
             <EventDetails title={selectedEventTitle} time={selectedEventTime} />
@@ -279,13 +280,13 @@ const Calendar = ({
       {isOpenConfirmModal && (
         <Modal
           isOpen={isOpenConfirmModal}
-          onClose={handleToggleConfirmModal}
+          onClose={onToggleConfirmModal}
           title="Delete Event"
           body={
             <ConfirmDeleteModalBody
               itemName={selectedEventTitle}
               onDeleteProduct={handleDeleteEvent}
-              onCloseModal={handleToggleConfirmModal}
+              onCloseModal={onToggleConfirmModal}
             />
           }
           haveCloseButton
