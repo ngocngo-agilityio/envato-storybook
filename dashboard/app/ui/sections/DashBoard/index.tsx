@@ -68,7 +68,6 @@ const DashBoard = () => {
                 py={5}
                 minH={500}
               >
-                {' '}
                 {inView && <TransactionTable />}
               </Box>
             )}
