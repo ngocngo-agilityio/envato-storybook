@@ -202,7 +202,7 @@ export const QUILL_SCHEMA = {
     validate: (value: string) => {
       const filterMessage = value.replace(REGEX.HTML_TAG_PATTERN, '').trim();
 
-      return filterMessage !== '';
+      return !!filterMessage;
     },
   },
 };
