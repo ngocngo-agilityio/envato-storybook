@@ -62,38 +62,82 @@ export const formatPageArray = ({
   const numberOfPage = Math.ceil(totalPage);
   let tempNumberOfButtons = arrOfCurrButtons;
 
+  // If the number of pages is less than or equal to 4, display all page buttons
   if (formatNumberButton(numberOfPage).length <= 4) {
+    // Create an array of page numbers from 1 to the number of pages.
     const numberOfPages = Array.from(
       { length: formatNumberButton(numberOfPage).length },
       (_, index) => (index + 1).toString(),
     );
+
     tempNumberOfButtons = numberOfPages;
-  } else {
-    const rangeStart = Math.max(1, currentPage - 1);
-    const rangeEnd = Math.min(
-      currentPage + 1,
-      formatNumberButton(numberOfPage).length,
-    );
-    tempNumberOfButtons = [
-      ...(rangeEnd >= formatNumberButton(numberOfPage).length - 1
-        ? [
-            ...(formatNumberButton(numberOfPage).length - 3 > 1
-              ? Array.from({ length: 3 }, (_, i) =>
-                  (formatNumberButton(numberOfPage).length - 4 + i).toString(),
-                )
-              : []),
-            (formatNumberButton(numberOfPage).length - 1).toString(),
-            formatNumberButton(numberOfPage).length.toString(),
-          ]
-        : [
-            rangeStart.toString(),
-            (rangeStart + 1).toString(),
-            (rangeStart + 2).toString(),
-            DOTS,
-            formatNumberButton(numberOfPage).length.toString(),
-          ]),
-    ].filter((button) => button !== null);
+
+    return tempNumberOfButtons;
   }
+
+  // Otherwise, determine the range of page buttons to display.
+  // The range starts at the current page minus 1, but not less than 1.
+  const rangeStart = Math.max(1, currentPage - 1);
+
+  // The range ends at the current page plus 1, but not more than the total number of pages.
+  const rangeEnd = Math.min(
+    currentPage + 1,
+    formatNumberButton(numberOfPage).length,
+  );
+
+  if (rangeStart === 1) {
+    tempNumberOfButtons = [
+      '1',
+      '2',
+      DOTS,
+      (formatNumberButton(numberOfPage).length - 1).toString(),
+      formatNumberButton(numberOfPage).length.toString(),
+    ];
+  }
+
+  if (rangeStart > 1 || (rangeEnd < totalPage - 1 && rangeEnd > 6)) {
+    tempNumberOfButtons = [
+      '1',
+      DOTS,
+
+      (currentPage - 1).toString(),
+      currentPage.toString(),
+      (currentPage + 1).toString(),
+
+      DOTS,
+
+      (formatNumberButton(numberOfPage).length - 1).toString(),
+      formatNumberButton(numberOfPage).length.toString(),
+    ];
+  }
+
+  // Set the temporary buttons array to the calculated range of page buttons.
+  // If the range end is near the last pages, display the last few page numbers.
+  // tempNumberOfButtons = [
+  //   ...(rangeEnd >= formatNumberButton(numberOfPage).length - 1
+  //     ? // show the last 5 buttons
+  //       [
+  //         '1',
+  //         // If there are more than 4 pages, show the last 3 buttons.
+  //         ...(formatNumberButton(numberOfPage).length - 3 > 1 //ví dụ có 10 pages =>  9 =< rangeEnd <= 10 =>  8 =< currentPage <=10 => currentPage là 3 page cuối
+  //           ? Array.from({ length: 3 }, (_, i) =>
+  //               (formatNumberButton(numberOfPage).length - 4 + i).toString(),
+  //             )
+  //           : []),
+
+  //         // Add the second last and last page numbers.
+  //         (formatNumberButton(numberOfPage).length - 1).toString(),
+  //         formatNumberButton(numberOfPage).length.toString(),
+  //       ]
+  //     : [
+  //         // Otherwise, show the range of buttons starting from the calculated start.
+  //         rangeStart.toString(),
+  //         (rangeStart + 1).toString(), // current page
+  //         (rangeStart + 2).toString(),
+  //         DOTS,
+  //         formatNumberButton(numberOfPage).length.toString(), //last page
+  //       ]),
+  // ].filter((button) => button !== null);
 
   return tempNumberOfButtons;
 };
