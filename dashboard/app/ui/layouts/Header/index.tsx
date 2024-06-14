@@ -7,7 +7,7 @@ import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 // Components
 import {
   BonusNotification,
-  Dropdown,
+  UserDropdown,
   IconButton,
   Logo,
   SwitchTheme,
@@ -27,7 +27,12 @@ import { TUserDetail } from '@/lib/interfaces';
 // Themes
 import { useColorfill } from '@/ui/themes/bases';
 
-const HeaderComponent = () => {
+interface Props {
+  isLogoutHandling?: boolean;
+  onSingOut: () => void;
+}
+
+const HeaderComponent = ({ isLogoutHandling = false, onSingOut }: Props) => {
   const { primary } = useColorfill();
   const pathname = usePathname();
   const name = TITLES_HEADER[`${pathname?.slice(1)}`] || TITLES_HEADER.DEFAULT;
@@ -86,11 +91,13 @@ const HeaderComponent = () => {
           </Text>
         </Box>
         <Box display={{ base: 'block', default: 'none' }}>
-          <Dropdown
+          <UserDropdown
             name={username}
             role={role}
             permission="Super Admin"
             src={avatarURL}
+            isLogoutHandling={isLogoutHandling}
+            onSingOut={onSingOut}
           />
         </Box>
       </Flex>
@@ -120,11 +127,13 @@ const HeaderComponent = () => {
             display={{ base: 'none', default: 'inline-flex', md: 'none' }}
             ml={4}
           >
-            <Dropdown
+            <UserDropdown
               name={username}
               role={role}
               permission={roles ? AUTHENTICATION_ROLE.SUPER_ADMIN : ''}
               src={avatarURL}
+              isLogoutHandling={isLogoutHandling}
+              onSingOut={onSingOut}
             />
           </Box>
         </Flex>
@@ -135,11 +144,13 @@ const HeaderComponent = () => {
           borderColor="border.primary"
           height="min-content"
         >
-          <Dropdown
+          <UserDropdown
             name={username}
             role={role}
             permission={roles ? AUTHENTICATION_ROLE.SUPER_ADMIN : ''}
             src={avatarURL}
+            isLogoutHandling={isLogoutHandling}
+            onSingOut={onSingOut}
           />
         </Box>
       </Flex>
