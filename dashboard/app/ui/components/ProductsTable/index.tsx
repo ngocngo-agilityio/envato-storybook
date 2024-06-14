@@ -271,7 +271,7 @@ const ProductsTable = () => {
           gap="10px"
           minW={180}
           borderRadius="15px"
-          paddingLeft={{ base: 30 }}
+          // paddingLeft={{ base: 30 }}
           w={{ base: 100, '3xl': 150, '5xl': 250 }}
         >
           <Box
