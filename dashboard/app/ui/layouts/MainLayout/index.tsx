@@ -108,7 +108,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
               onClose={onClose}
               onSignOut={signOut}
             />
-            <Header />
+            <Header isLogoutHandling={isLogoutHandling} onSingOut={signOut} />
             {children}
           </Box>
         </Flex>
