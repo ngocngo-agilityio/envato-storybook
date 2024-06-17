@@ -31,7 +31,7 @@ import { TAuthStoreData, authStore } from '@/lib/stores';
 import { customToast, formatDecimalNumber } from '@/lib/utils';
 
 // Types
-import { TPinCodeForm } from '@/lib/interfaces';
+import { TPinCodeForm, TUserDetail } from '@/lib/interfaces';
 
 type TBalanceStatus = {
   balance: string;
@@ -46,8 +46,10 @@ const Card = ({ balance }: TCardProps) => {
     useDisclosure({ defaultIsOpen: true });
 
   const {
-    handleSetPinCode,
-    handleConfirmPinCode,
+    isSetNewPinCode,
+    isConfirmPinCode,
+    setNewPinCode,
+    confirmPinCode,
     isConfirmPinCodeModalOpen,
     isSetPinCodeModalOpen,
     onCloseConfirmPinCodeModal,
@@ -64,14 +66,14 @@ const Card = ({ balance }: TCardProps) => {
   const {
     control: setPinCodeControl,
     handleSubmit: handleSubmitSetPinCode,
-    formState: { isValid: isSetValid, isSubmitting: isSetSubmitting },
+    formState: { isValid: isSetValid },
     reset: resetSetPinCodeForm,
   } = useForm<TPinCodeForm>({});
 
   const {
     control: confirmPinCodeControl,
     handleSubmit: handleSubmitConfirmPinCode,
-    formState: { isValid: isConfirmValid, isSubmitting: isConfirmSubmitting },
+    formState: { isValid: isConfirmValid },
     reset: resetConfirmPinCodeForm,
   } = useForm<TPinCodeForm>({
     defaultValues: {
@@ -105,75 +107,141 @@ const Card = ({ balance }: TCardProps) => {
     user?.pinCode,
   ]);
 
+  const handleSetNewPinCodeSuccess = useCallback(
+    (user: Omit<TUserDetail, 'password'>, pinCode: string) => {
+      setUser({ user: { ...user, pinCode } });
+      onCloseSetPinCodeModal();
+      resetSetPinCodeForm();
+
+      toast(
+        customToast(
+          SUCCESS_MESSAGES.SET_PIN_CODE.title,
+          SUCCESS_MESSAGES.SET_PIN_CODE.description,
+          STATUS.SUCCESS,
+        ),
+      );
+    },
+    [onCloseSetPinCodeModal, resetSetPinCodeForm, setUser, toast],
+  );
+
+  const handleSetNewPinCodeError = useCallback(() => {
+    toast(
+      customToast(
+        ERROR_MESSAGES.SET_PIN_CODE.title,
+        ERROR_MESSAGES.SET_PIN_CODE.description,
+        STATUS.ERROR,
+      ),
+    );
+  }, [toast]);
+
+  const handleConfirmPinCodeSuccess = useCallback(async () => {
+    onCloseConfirmPinCodeModal();
+    resetConfirmPinCodeForm({
+      pinCode: '',
+    });
+    onToggleShowBalance();
+
+    toast(
+      customToast(
+        SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
+        SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
+        STATUS.SUCCESS,
+      ),
+    );
+  }, [
+    onCloseConfirmPinCodeModal,
+    onToggleShowBalance,
+    resetConfirmPinCodeForm,
+    toast,
+  ]);
+
+  const handleConfirmPinCodeError = useCallback(() => {
+    toast(
+      customToast(
+        ERROR_MESSAGES.CONFIRM_PIN_CODE.title,
+        ERROR_MESSAGES.CONFIRM_PIN_CODE.description,
+        STATUS.ERROR,
+      ),
+    );
+    resetConfirmPinCodeForm();
+  }, [resetConfirmPinCodeForm, toast]);
+
   const onSubmitPinCode: SubmitHandler<TPinCodeForm> = useCallback(
     async (data) => {
       if (user) {
         data.userId = user.id;
         if (!user?.pinCode) {
-          try {
-            await handleSetPinCode(data);
+          setNewPinCode(data, {
+            onSuccess: () => handleSetNewPinCodeSuccess(user, data.pinCode),
+            onError: handleSetNewPinCodeError,
+          });
 
-            setUser({ user: { ...user, pinCode: data.pinCode } });
+          // try {
+          //   await handleSetPinCode(data);
 
-            onCloseSetPinCodeModal();
+          //   setUser({ user: { ...user, pinCode: data.pinCode } });
 
-            resetSetPinCodeForm();
+          //   onCloseSetPinCodeModal();
 
-            toast(
-              customToast(
-                SUCCESS_MESSAGES.SET_PIN_CODE.title,
-                SUCCESS_MESSAGES.SET_PIN_CODE.description,
-                STATUS.SUCCESS,
-              ),
-            );
-          } catch (error) {
-            toast(
-              customToast(
-                SUCCESS_MESSAGES.SET_PIN_CODE.title,
-                SUCCESS_MESSAGES.SET_PIN_CODE.description,
-                STATUS.SUCCESS,
-              ),
-            );
-          }
+          //   resetSetPinCodeForm();
+
+          //   toast(
+          //     customToast(
+          //       SUCCESS_MESSAGES.SET_PIN_CODE.title,
+          //       SUCCESS_MESSAGES.SET_PIN_CODE.description,
+          //       STATUS.SUCCESS,
+          //     ),
+          //   );
+          // } catch (error) {
+          //   toast(
+          //     customToast(
+          //       SUCCESS_MESSAGES.SET_PIN_CODE.title,
+          //       SUCCESS_MESSAGES.SET_PIN_CODE.description,
+          //       STATUS.SUCCESS,
+          //     ),
+          //   );
+          // }
         } else {
-          try {
-            await handleConfirmPinCode(data);
-            onCloseConfirmPinCodeModal();
-            resetConfirmPinCodeForm({
-              pinCode: '',
-            });
-            onToggleShowBalance();
+          confirmPinCode(data, {
+            onSuccess: handleConfirmPinCodeSuccess,
+            onError: handleConfirmPinCodeError,
+          });
 
-            toast(
-              customToast(
-                SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
-                SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
-                STATUS.SUCCESS,
-              ),
-            );
-          } catch (error) {
-            toast(
-              customToast(
-                ERROR_MESSAGES.CONFIRM_PIN_CODE.title,
-                ERROR_MESSAGES.CONFIRM_PIN_CODE.description,
-                STATUS.ERROR,
-              ),
-            ),
-              resetConfirmPinCodeForm();
-          }
+          // try {
+          //   await handleConfirmPinCode(data);
+          //   onCloseConfirmPinCodeModal();
+          //   resetConfirmPinCodeForm({
+          //     pinCode: '',
+          //   });
+          //   onToggleShowBalance();
+
+          //   toast(
+          //     customToast(
+          //       SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
+          //       SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
+          //       STATUS.SUCCESS,
+          //     ),
+          //   );
+          // } catch (error) {
+          //   toast(
+          //     customToast(
+          //       ERROR_MESSAGES.CONFIRM_PIN_CODE.title,
+          //       ERROR_MESSAGES.CONFIRM_PIN_CODE.description,
+          //       STATUS.ERROR,
+          //     ),
+          //   ),
+          //     resetConfirmPinCodeForm();
+          // }
         }
       }
     },
     [
-      handleConfirmPinCode,
-      handleSetPinCode,
-      onCloseConfirmPinCodeModal,
-      onCloseSetPinCodeModal,
-      onToggleShowBalance,
-      resetConfirmPinCodeForm,
-      resetSetPinCodeForm,
-      setUser,
-      toast,
+      confirmPinCode,
+      handleConfirmPinCodeError,
+      handleConfirmPinCodeSuccess,
+      handleSetNewPinCodeError,
+      handleSetNewPinCodeSuccess,
+      setNewPinCode,
       user,
     ],
   );
@@ -193,14 +261,16 @@ const Card = ({ balance }: TCardProps) => {
       user?.pinCode ? (
         <PinCode
           control={confirmPinCodeControl}
-          isDisabled={!isConfirmValid || isConfirmSubmitting}
+          isDisabled={!isConfirmValid || isConfirmPinCode}
+          isLoading={isConfirmPinCode}
           onSubmit={handleSubmitConfirmPinCode(onSubmitPinCode)}
           onClose={handleCloseConfirmPinCodeModal}
         />
       ) : (
         <PinCode
           control={setPinCodeControl}
-          isDisabled={!isSetValid || isSetSubmitting}
+          isDisabled={!isSetValid || isSetNewPinCode}
+          isLoading={isSetNewPinCode}
           onSubmit={handleSubmitSetPinCode(onSubmitPinCode)}
           onClose={handleCloseSetPinCodeModal}
         />
@@ -211,9 +281,9 @@ const Card = ({ balance }: TCardProps) => {
       handleCloseSetPinCodeModal,
       handleSubmitConfirmPinCode,
       handleSubmitSetPinCode,
-      isConfirmSubmitting,
+      isConfirmPinCode,
       isConfirmValid,
-      isSetSubmitting,
+      isSetNewPinCode,
       isSetValid,
       onSubmitPinCode,
       setPinCodeControl,

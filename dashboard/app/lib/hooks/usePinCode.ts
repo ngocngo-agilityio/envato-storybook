@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
-import { AxiosError } from 'axios';
+// Libs
 import { useDisclosure } from '@chakra-ui/react';
+import { useMutation } from '@tanstack/react-query';
 
 // Constants
 import { END_POINTS } from '@/lib/constants';
@@ -8,53 +8,102 @@ import { END_POINTS } from '@/lib/constants';
 // Services
 import { mainHttpService } from '@/lib/services';
 
-// Utils
-import { logActivity } from '@/lib/utils';
-
 // Types
 import { EActivity, TPinCodeForm } from '@/lib/interfaces';
+import { logActivity } from '../utils';
 
-export type ResponsePinCode = {
+export type PinCodeResponse = {
   message: string;
 };
+
 export const usePinCode = () => {
-  const handleSetPinCode = useCallback(async (data: TPinCodeForm) => {
-    try {
-      return await mainHttpService.post<ResponsePinCode>({
+  const { mutate: setNewPinCode, isPending: isSetNewPinCode } = useMutation({
+    mutationFn: async (data: TPinCodeForm) => {
+      const { userId, pinCode } = data || {};
+
+      // await mainHttpService.post<TRecentActivities>({
+      //   path: END_POINTS.RECENT_ACTIVITIES,
+      //   data: {
+      //     userId,
+      //     actionName: EActivity.CREATE_PIN_CODE,
+      //   },
+      // });
+
+      return mainHttpService.post<PinCodeResponse>({
         path: END_POINTS.CREATE_PIN,
         data: {
-          pinCode: data.pinCode,
-          userId: data.userId,
+          pinCode,
+          userId,
         },
+        userId,
         actionName: EActivity.CREATE_PIN_CODE,
         onActivity: logActivity,
       });
-    } catch (error) {
-      const { message } = error as AxiosError;
+    },
+  });
 
-      throw new Error(message);
-    }
-  }, []);
+  const { mutate: confirmPinCode, isPending: isConfirmPinCode } = useMutation({
+    mutationFn: async (data: TPinCodeForm) => {
+      const { userId, pinCode } = data || {};
 
-  const handleConfirmPinCode = useCallback(async (data: TPinCodeForm) => {
-    try {
-      return await mainHttpService.post<ResponsePinCode>({
+      // await mainHttpService.post<TRecentActivities>({
+      //   path: END_POINTS.RECENT_ACTIVITIES,
+      //   data: {
+      //     userId,
+      //     actionName: EActivity.ACTIVE_PIN_CODE,
+      //   },
+      // });
+
+      return await mainHttpService.post<PinCodeResponse>({
         path: END_POINTS.CONFIRM_PIN,
         data: {
-          pinCode: data.pinCode,
-          userId: data.userId,
+          pinCode,
+          userId,
         },
-
         actionName: EActivity.ACTIVE_PIN_CODE,
-        userId: data.userId,
+        userId,
         onActivity: logActivity,
       });
-    } catch (error) {
-      const { message } = error as AxiosError;
+    },
+  });
 
-      throw new Error(message);
-    }
-  }, []);
+  // const handleSetPinCode = useCallback(async (data: TPinCodeForm) => {
+  //   try {
+  //     return await mainHttpService.post<ResponsePinCode>({
+  //       path: END_POINTS.CREATE_PIN,
+  //       data: {
+  //         pinCode: data.pinCode,
+  //         userId: data.userId,
+  //       },
+  //       actionName: EActivity.CREATE_PIN_CODE,
+  //       onActivity: logActivity,
+  //     });
+  //   } catch (error) {
+  //     const { message } = error as AxiosError;
+
+  //     throw new Error(message);
+  //   }
+  // }, []);
+
+  // const handleConfirmPinCode = useCallback(async (data: TPinCodeForm) => {
+  //   try {
+  //     return await mainHttpService.post<ResponsePinCode>({
+  //       path: END_POINTS.CONFIRM_PIN,
+  //       data: {
+  //         pinCode: data.pinCode,
+  //         userId: data.userId,
+  //       },
+
+  //       actionName: EActivity.ACTIVE_PIN_CODE,
+  //       userId: data.userId,
+  //       onActivity: logActivity,
+  //     });
+  //   } catch (error) {
+  //     const { message } = error as AxiosError;
+
+  //     throw new Error(message);
+  //   }
+  // }, []);
 
   const {
     isOpen: isSetPinCodeModalOpen,
@@ -69,8 +118,10 @@ export const usePinCode = () => {
   } = useDisclosure();
 
   return {
-    handleSetPinCode,
-    handleConfirmPinCode,
+    isSetNewPinCode,
+    isConfirmPinCode,
+    setNewPinCode,
+    confirmPinCode,
     isSetPinCodeModalOpen,
     onCloseSetPinCodeModal,
     onOpenSetPinCodeModal,

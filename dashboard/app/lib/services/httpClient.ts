@@ -48,6 +48,8 @@ export class HttpService {
     return this.axiosClient
       .post<T>(`${this.baseApi}${path}`, data, configs)
       .then((response) => {
+        console.log('activity', typeof activity);
+
         typeof activity === 'number' &&
           this.axiosClient.interceptors.response.eject(activity);
         return response;
