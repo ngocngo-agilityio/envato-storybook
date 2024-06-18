@@ -1,17 +1,17 @@
 'use client';
 
 // Libs
-import { useCallback, useId, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Box, Grid, GridItem, useToast } from '@chakra-ui/react';
 import { InView } from 'react-intersection-observer';
 import dynamic from 'next/dynamic';
 import dayjs from 'dayjs';
 
 // Hooks
-import { useAuth, useEvents, usePinCode } from '@/lib/hooks';
+import { useEvents, useSubmitPinCode } from '@/lib/hooks';
 
 // Types
-import { TEvent, TPinCodeForm, TUserDetail } from '@/lib/interfaces';
+import { TEvent } from '@/lib/interfaces';
 
 // Constants
 import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
@@ -21,7 +21,6 @@ import { customToast } from '@/lib/utils';
 
 // Components
 import { Calendar } from '@/ui/components';
-import { TAuthStoreData, authStore } from '@/lib/stores';
 
 // dynamic loading components
 const CardPayment = dynamic(() => import('@/ui/components/CardPayment'));
@@ -29,10 +28,6 @@ const CardPayment = dynamic(() => import('@/ui/components/CardPayment'));
 const CalendarSection = () => {
   const toast = useToast();
   const [date, setDate] = useState(new Date());
-
-  // Stores
-  const user = authStore((state): TAuthStoreData['user'] => state.user);
-  const { setUser } = useAuth();
 
   // Events
   const {
@@ -46,17 +41,16 @@ const CalendarSection = () => {
     deleteEvent,
   } = useEvents();
 
-  // Pin code
+  // Pin Code
   const {
-    isSetNewPinCode,
-    isConfirmPinCode,
-    setNewPinCode,
-    confirmPinCode,
-    onCloseSetPinCodeModal,
-    onCloseConfirmPinCodeModal,
-  } = usePinCode();
-
-  const { pinCode = '', id: userId = '' } = user || {};
+    isLoadingPinCode,
+    userPinCode,
+    isPinCodeModalOpen,
+    onTogglePinCodeModal,
+    isShowBalance,
+    onToggleShowBalance,
+    onSubmitPinCode,
+  } = useSubmitPinCode();
 
   const isLoading =
     isLoadingEvents || isAddEvent || isUpdateEvent || isDeleteEvent;
@@ -191,96 +185,6 @@ const CalendarSection = () => {
     [deleteEvent, handleDeleteEventError, handleDeleteEventSuccess],
   );
 
-  const handleSetNewPinCodeSuccess = useCallback(
-    (pinCode: string, callback: () => void) => {
-      setUser({ user: { ...user, pinCode } });
-      onCloseSetPinCodeModal();
-      // resetSetPinCodeForm();
-
-      callback();
-
-      toast(
-        customToast(
-          SUCCESS_MESSAGES.SET_PIN_CODE.title,
-          SUCCESS_MESSAGES.SET_PIN_CODE.description,
-          STATUS.SUCCESS,
-        ),
-      );
-    },
-    [onCloseSetPinCodeModal, setUser, toast, user],
-  );
-
-  const handleSetNewPinCodeError = useCallback(() => {
-    toast(
-      customToast(
-        ERROR_MESSAGES.SET_PIN_CODE.title,
-        ERROR_MESSAGES.SET_PIN_CODE.description,
-        STATUS.ERROR,
-      ),
-    );
-  }, [toast]);
-
-  const handleConfirmPinCodeSuccess = useCallback(
-    async (callback: () => void) => {
-      onCloseConfirmPinCodeModal();
-      // resetConfirmPinCodeForm({
-      //   pinCode: '',
-      // });
-
-      // onToggleShowBalance();
-
-      callback();
-
-      toast(
-        customToast(
-          SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
-          SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
-          STATUS.SUCCESS,
-        ),
-      );
-    },
-    [onCloseConfirmPinCodeModal, toast],
-  );
-
-  const handleConfirmPinCodeError = useCallback(
-    (callback: () => void) => {
-      toast(
-        customToast(
-          ERROR_MESSAGES.CONFIRM_PIN_CODE.title,
-          ERROR_MESSAGES.CONFIRM_PIN_CODE.description,
-          STATUS.ERROR,
-        ),
-      );
-
-      callback();
-    },
-    [toast],
-  );
-
-  const handleConfirmPinCode = (pinCode: string, callback: () => void) => {
-    const payload = {
-      userId,
-      pinCode,
-    };
-
-    confirmPinCode(payload, {
-      onSuccess: () => handleConfirmPinCodeSuccess(callback),
-      onError: () => handleConfirmPinCodeError(callback),
-    });
-  };
-
-  const handleSetNewPinCode = (pinCode: string, callback: () => void) => {
-    const payload = {
-      userId,
-      pinCode,
-    };
-
-    setNewPinCode(payload, {
-      onSuccess: () => handleSetNewPinCodeSuccess(pinCode, callback),
-      onError: () => handleSetNewPinCodeError(),
-    });
-  };
-
   return (
     <Grid
       bg="background.body.primary"
@@ -315,11 +219,13 @@ const CalendarSection = () => {
           <GridItem mt={{ base: 6, '2xl': 0 }} ref={ref}>
             {inView && (
               <CardPayment
-                isLoadingSetPinCode={isSetNewPinCode}
-                isLoadingConfirmPinCode={isConfirmPinCode}
-                userPinCode={pinCode}
-                onConfirmPinCode={handleConfirmPinCode}
-                onSetNewPinCode={handleSetNewPinCode}
+                isLoadingPinCode={isLoadingPinCode}
+                userPinCode={userPinCode}
+                onSubmitPinCodeForm={onSubmitPinCode}
+                isPinCodeModalOpen={isPinCodeModalOpen}
+                onTogglePinCodeModal={onTogglePinCodeModal}
+                isShowBalance={isShowBalance}
+                onToggleShowBalance={onToggleShowBalance}
               />
             )}
           </GridItem>

@@ -51,20 +51,24 @@ export type TTransfer = {
 
 interface CardPaymentProps {
   userPinCode: string;
-  isLoadingConfirmPinCode: boolean;
-  isLoadingSetPinCode: boolean;
-  onConfirmPinCode: (pinCode: string, callback: () => void) => void;
-  onSetNewPinCode: (pinCode: string, callback: () => void) => void;
+  isLoadingPinCode: boolean;
+  onSubmitPinCodeForm: (pinCode: string, callback?: () => void) => void;
+  isPinCodeModalOpen: boolean;
+  onTogglePinCodeModal: () => void;
+  isShowBalance: boolean;
+  onToggleShowBalance: () => void;
 }
 
 const REQUIRE_FIELDS = ['amount', 'memberId'];
 
 const CardPayment = ({
   userPinCode,
-  isLoadingConfirmPinCode,
-  isLoadingSetPinCode,
-  onConfirmPinCode,
-  onSetNewPinCode,
+  isLoadingPinCode,
+  isPinCodeModalOpen,
+  onTogglePinCodeModal,
+  isShowBalance,
+  onToggleShowBalance,
+  onSubmitPinCodeForm,
 }: CardPaymentProps): JSX.Element => {
   const user = authStore((state) => state.user);
 
@@ -278,65 +282,11 @@ const CardPayment = ({
             onSuccess: () => handleSetNewPinCodeSuccess(user, data.pinCode),
             onError: handleSetNewPinCodeError,
           });
-
-          // try {
-          //   await handleSetPinCode(data);
-
-          //   setUser({ user: { ...user, pinCode: data.pinCode } });
-
-          //   onCloseSetPinCodeModal();
-
-          //   resetSetPinCodeForm();
-
-          //   toast(
-          //     customToast(
-          //       SUCCESS_MESSAGES.SET_PIN_CODE.title,
-          //       SUCCESS_MESSAGES.SET_PIN_CODE.description,
-          //       STATUS.SUCCESS,
-          //     ),
-          //   );
-          // } catch (error) {
-          //   toast(
-          //     customToast(
-          //       ERROR_MESSAGES.SET_PIN_CODE.title,
-          //       ERROR_MESSAGES.SET_PIN_CODE.description,
-          //       STATUS.ERROR,
-          //     ),
-          //   );
-          // }
         } else {
           confirmPinCode(data, {
             onSuccess: handleConfirmPinCodeSuccess,
             onError: handleConfirmPinCodeError,
           });
-
-          // try {
-          //   await handleConfirmPinCode(data);
-          //   onCloseConfirmPinCodeModal();
-          //   resetConfirmPinCodeForm({
-          //     pinCode: '',
-          //   });
-
-          //   await handleSubmitSendMoney(onSubmitSendMoney)();
-          //   resetSendMoneyForm();
-
-          //   toast(
-          //     customToast(
-          //       SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
-          //       SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
-          //       STATUS.SUCCESS,
-          //     ),
-          //   );
-          // } catch (error) {
-          //   toast(
-          //     customToast(
-          //       ERROR_MESSAGES.CONFIRM_PIN_CODE.title,
-          //       ERROR_MESSAGES.CONFIRM_PIN_CODE.description,
-          //       STATUS.ERROR,
-          //     ),
-          //   );
-          //   resetConfirmPinCodeForm();
-          // }
         }
       }
     },
@@ -385,11 +335,13 @@ const CardPayment = ({
 
         <CardBalance
           balance={currentWalletMoney?.balance || 0}
-          isLoadingSetPinCode={isLoadingSetPinCode}
-          isLoadingConfirmPinCode={isLoadingConfirmPinCode}
+          isLoadingPinCode={isLoadingPinCode}
           userPinCode={userPinCode}
-          onConfirmPinCode={onConfirmPinCode}
-          onSetNewPinCode={onSetNewPinCode}
+          onSubmitPinCode={onSubmitPinCodeForm}
+          isPinCodeModalOpen={isPinCodeModalOpen}
+          onTogglePinCodeModal={onTogglePinCodeModal}
+          isShowBalance={isShowBalance}
+          onToggleShowBalance={onToggleShowBalance}
         />
 
         <Box

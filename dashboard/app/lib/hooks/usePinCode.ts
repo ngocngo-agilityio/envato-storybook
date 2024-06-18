@@ -1,16 +1,24 @@
 // Libs
-import { useDisclosure } from '@chakra-ui/react';
+import { useDisclosure, useToast } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
 
 // Constants
-import { END_POINTS } from '@/lib/constants';
+import {
+  END_POINTS,
+  ERROR_MESSAGES,
+  STATUS,
+  SUCCESS_MESSAGES,
+} from '@/lib/constants';
 
 // Services
 import { mainHttpService } from '@/lib/services';
 
 // Types
 import { EActivity, TPinCodeForm } from '@/lib/interfaces';
-import { logActivity } from '../utils';
+import { customToast, logActivity } from '../utils';
+import { useCallback } from 'react';
+import { TAuthStoreData, authStore } from '../stores';
+import { useAuth } from './useAuth';
 
 export type PinCodeResponse = {
   message: string;
@@ -20,14 +28,6 @@ export const usePinCode = () => {
   const { mutate: setNewPinCode, isPending: isSetNewPinCode } = useMutation({
     mutationFn: async (data: TPinCodeForm) => {
       const { userId, pinCode } = data || {};
-
-      // await mainHttpService.post<TRecentActivities>({
-      //   path: END_POINTS.RECENT_ACTIVITIES,
-      //   data: {
-      //     userId,
-      //     actionName: EActivity.CREATE_PIN_CODE,
-      //   },
-      // });
 
       return mainHttpService.post<PinCodeResponse>({
         path: END_POINTS.CREATE_PIN,
@@ -46,14 +46,6 @@ export const usePinCode = () => {
     mutationFn: async (data: TPinCodeForm) => {
       const { userId, pinCode } = data || {};
 
-      // await mainHttpService.post<TRecentActivities>({
-      //   path: END_POINTS.RECENT_ACTIVITIES,
-      //   data: {
-      //     userId,
-      //     actionName: EActivity.ACTIVE_PIN_CODE,
-      //   },
-      // });
-
       return await mainHttpService.post<PinCodeResponse>({
         path: END_POINTS.CONFIRM_PIN,
         data: {
@@ -66,44 +58,6 @@ export const usePinCode = () => {
       });
     },
   });
-
-  // const handleSetPinCode = useCallback(async (data: TPinCodeForm) => {
-  //   try {
-  //     return await mainHttpService.post<ResponsePinCode>({
-  //       path: END_POINTS.CREATE_PIN,
-  //       data: {
-  //         pinCode: data.pinCode,
-  //         userId: data.userId,
-  //       },
-  //       actionName: EActivity.CREATE_PIN_CODE,
-  //       onActivity: logActivity,
-  //     });
-  //   } catch (error) {
-  //     const { message } = error as AxiosError;
-
-  //     throw new Error(message);
-  //   }
-  // }, []);
-
-  // const handleConfirmPinCode = useCallback(async (data: TPinCodeForm) => {
-  //   try {
-  //     return await mainHttpService.post<ResponsePinCode>({
-  //       path: END_POINTS.CONFIRM_PIN,
-  //       data: {
-  //         pinCode: data.pinCode,
-  //         userId: data.userId,
-  //       },
-
-  //       actionName: EActivity.ACTIVE_PIN_CODE,
-  //       userId: data.userId,
-  //       onActivity: logActivity,
-  //     });
-  //   } catch (error) {
-  //     const { message } = error as AxiosError;
-
-  //     throw new Error(message);
-  //   }
-  // }, []);
 
   const {
     isOpen: isSetPinCodeModalOpen,
@@ -128,5 +82,118 @@ export const usePinCode = () => {
     isConfirmPinCodeModalOpen,
     onCloseConfirmPinCodeModal,
     onOpenConfirmPinCodeModal,
+  };
+};
+
+export const useSubmitPinCode = () => {
+  const toast = useToast();
+  const { isOpen: isPinCodeModalOpen, onToggle: onTogglePinCodeModal } =
+    useDisclosure();
+  const { isOpen: isShowBalance, onToggle: onToggleShowBalance } =
+    useDisclosure({ defaultIsOpen: true });
+
+  // Stores
+  const user = authStore((state): TAuthStoreData['user'] => state.user);
+  const { setUser } = useAuth();
+
+  // Pin code
+  const { isSetNewPinCode, isConfirmPinCode, setNewPinCode, confirmPinCode } =
+    usePinCode();
+
+  const { pinCode = '', id: userId = '' } = user || {};
+
+  const handleSetNewPinCodeSuccess = useCallback(
+    (pinCode: string, callback?: () => void) => {
+      user && setUser({ user: { ...user, pinCode } });
+      onTogglePinCodeModal();
+      callback && callback();
+
+      toast(
+        customToast(
+          SUCCESS_MESSAGES.SET_PIN_CODE.title,
+          SUCCESS_MESSAGES.SET_PIN_CODE.description,
+          STATUS.SUCCESS,
+        ),
+      );
+    },
+    [onTogglePinCodeModal, setUser, toast, user],
+  );
+
+  const handleSetNewPinCodeError = useCallback(
+    (callback?: () => void) => {
+      toast(
+        customToast(
+          ERROR_MESSAGES.SET_PIN_CODE.title,
+          ERROR_MESSAGES.SET_PIN_CODE.description,
+          STATUS.ERROR,
+        ),
+      );
+
+      callback && callback();
+    },
+    [toast],
+  );
+
+  const handleConfirmPinCodeSuccess = useCallback(
+    async (callback?: () => void) => {
+      onTogglePinCodeModal();
+      onToggleShowBalance();
+      callback && callback();
+
+      toast(
+        customToast(
+          SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
+          SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
+          STATUS.SUCCESS,
+        ),
+      );
+    },
+    [onTogglePinCodeModal, onToggleShowBalance, toast],
+  );
+
+  const handleConfirmPinCodeError = useCallback(
+    (callback?: () => void) => {
+      toast(
+        customToast(
+          ERROR_MESSAGES.CONFIRM_PIN_CODE.title,
+          ERROR_MESSAGES.CONFIRM_PIN_CODE.description,
+          STATUS.ERROR,
+        ),
+      );
+
+      callback && callback();
+    },
+    [toast],
+  );
+
+  const handleSubmitPinCode = (pinCode: string, callback?: () => void) => {
+    const payload = {
+      userId,
+      pinCode,
+    };
+
+    if (pinCode) {
+      confirmPinCode(payload, {
+        onSuccess: () => handleConfirmPinCodeSuccess(callback),
+        onError: () => handleConfirmPinCodeError(callback),
+      });
+
+      return;
+    }
+
+    setNewPinCode(payload, {
+      onSuccess: () => handleSetNewPinCodeSuccess(pinCode, callback),
+      onError: () => handleSetNewPinCodeError(callback),
+    });
+  };
+
+  return {
+    isLoadingPinCode: isSetNewPinCode || isConfirmPinCode,
+    userPinCode: pinCode,
+    isPinCodeModalOpen,
+    onTogglePinCodeModal,
+    isShowBalance,
+    onToggleShowBalance,
+    onSubmitPinCode: handleSubmitPinCode,
   };
 };
