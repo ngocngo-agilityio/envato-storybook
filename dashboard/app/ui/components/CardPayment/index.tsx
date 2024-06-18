@@ -49,9 +49,23 @@ export type TTransfer = {
   userId: string;
 };
 
+interface CardPaymentProps {
+  userPinCode: string;
+  isLoadingConfirmPinCode: boolean;
+  isLoadingSetPinCode: boolean;
+  onConfirmPinCode: (pinCode: string, callback: () => void) => void;
+  onSetNewPinCode: (pinCode: string, callback: () => void) => void;
+}
+
 const REQUIRE_FIELDS = ['amount', 'memberId'];
 
-const CardPayment = (): JSX.Element => {
+const CardPayment = ({
+  userPinCode,
+  isLoadingConfirmPinCode,
+  isLoadingSetPinCode,
+  onConfirmPinCode,
+  onSetNewPinCode,
+}: CardPaymentProps): JSX.Element => {
   const user = authStore((state) => state.user);
 
   const { setUser } = useAuth();
@@ -369,7 +383,14 @@ const CardPayment = (): JSX.Element => {
           my wallet
         </Heading>
 
-        <CardBalance balance={currentWalletMoney?.balance || 0} />
+        <CardBalance
+          balance={currentWalletMoney?.balance || 0}
+          isLoadingSetPinCode={isLoadingSetPinCode}
+          isLoadingConfirmPinCode={isLoadingConfirmPinCode}
+          userPinCode={userPinCode}
+          onConfirmPinCode={onConfirmPinCode}
+          onSetNewPinCode={onSetNewPinCode}
+        />
 
         <Box
           as="form"

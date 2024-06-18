@@ -40,16 +40,28 @@ type TBalanceStatus = {
 
 export type TCardProps = {
   balance: number;
+  userPinCode: string;
+  isLoadingConfirmPinCode: boolean;
+  isLoadingSetPinCode: boolean;
+  onConfirmPinCode: (pinCode: string, callback: () => void) => void;
+  onSetNewPinCode: (pinCode: string, callback: () => void) => void;
 };
-const Card = ({ balance }: TCardProps) => {
+const Card = ({
+  balance,
+  userPinCode,
+  isLoadingConfirmPinCode,
+  isLoadingSetPinCode,
+  onConfirmPinCode,
+  onSetNewPinCode,
+}: TCardProps) => {
   const { isOpen: isShowBalance, onToggle: onToggleShowBalance } =
     useDisclosure({ defaultIsOpen: true });
 
   const {
-    isSetNewPinCode,
-    isConfirmPinCode,
-    setNewPinCode,
-    confirmPinCode,
+    // isSetNewPinCode,
+    // isConfirmPinCode,
+    // setNewPinCode,
+    // confirmPinCode,
     isConfirmPinCodeModalOpen,
     isSetPinCodeModalOpen,
     onCloseConfirmPinCodeModal,
@@ -83,166 +95,160 @@ const Card = ({ balance }: TCardProps) => {
     reValidateMode: 'onSubmit',
   });
 
-  const user = authStore((state): TAuthStoreData['user'] => state.user);
+  // const user = authStore((state): TAuthStoreData['user'] => state.user);
 
-  const { setUser } = useAuth();
+  // const { setUser } = useAuth();
 
-  const toast = useToast();
+  // const toast = useToast();
 
   const handleToggleShowBalance = useCallback(() => {
     if (!isShowBalance) {
       onToggleShowBalance();
-    } else {
-      if (!user?.pinCode) {
-        onOpenSetPinCodeModal();
-      } else {
-        onOpenConfirmPinCodeModal();
-      }
+
+      return;
     }
+
+    !userPinCode ? onOpenSetPinCodeModal() : onOpenConfirmPinCodeModal();
   }, [
     isShowBalance,
     onOpenConfirmPinCodeModal,
     onOpenSetPinCodeModal,
     onToggleShowBalance,
-    user?.pinCode,
+    userPinCode,
   ]);
 
-  const handleSetNewPinCodeSuccess = useCallback(
-    (user: Omit<TUserDetail, 'password'>, pinCode: string) => {
-      setUser({ user: { ...user, pinCode } });
-      onCloseSetPinCodeModal();
-      resetSetPinCodeForm();
+  // const handleSetNewPinCodeSuccess = useCallback(
+  //   (user: Omit<TUserDetail, 'password'>, pinCode: string) => {
+  //     setUser({ user: { ...user, pinCode } });
+  //     onCloseSetPinCodeModal();
+  //     resetSetPinCodeForm();
 
-      toast(
-        customToast(
-          SUCCESS_MESSAGES.SET_PIN_CODE.title,
-          SUCCESS_MESSAGES.SET_PIN_CODE.description,
-          STATUS.SUCCESS,
-        ),
-      );
-    },
-    [onCloseSetPinCodeModal, resetSetPinCodeForm, setUser, toast],
-  );
+  //     toast(
+  //       customToast(
+  //         SUCCESS_MESSAGES.SET_PIN_CODE.title,
+  //         SUCCESS_MESSAGES.SET_PIN_CODE.description,
+  //         STATUS.SUCCESS,
+  //       ),
+  //     );
+  //   },
+  //   [onCloseSetPinCodeModal, resetSetPinCodeForm, setUser, toast],
+  // );
 
-  const handleSetNewPinCodeError = useCallback(() => {
-    toast(
-      customToast(
-        ERROR_MESSAGES.SET_PIN_CODE.title,
-        ERROR_MESSAGES.SET_PIN_CODE.description,
-        STATUS.ERROR,
-      ),
-    );
-  }, [toast]);
+  // const handleSetNewPinCodeError = useCallback(() => {
+  //   toast(
+  //     customToast(
+  //       ERROR_MESSAGES.SET_PIN_CODE.title,
+  //       ERROR_MESSAGES.SET_PIN_CODE.description,
+  //       STATUS.ERROR,
+  //     ),
+  //   );
+  // }, [toast]);
 
-  const handleConfirmPinCodeSuccess = useCallback(async () => {
-    onCloseConfirmPinCodeModal();
-    resetConfirmPinCodeForm({
-      pinCode: '',
-    });
-    onToggleShowBalance();
+  // const handleConfirmPinCodeSuccess = useCallback(async () => {
+  //   onCloseConfirmPinCodeModal();
+  //   resetConfirmPinCodeForm({
+  //     pinCode: '',
+  //   });
+  //   onToggleShowBalance();
 
-    toast(
-      customToast(
-        SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
-        SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
-        STATUS.SUCCESS,
-      ),
-    );
-  }, [
-    onCloseConfirmPinCodeModal,
-    onToggleShowBalance,
-    resetConfirmPinCodeForm,
-    toast,
-  ]);
+  //   toast(
+  //     customToast(
+  //       SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
+  //       SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
+  //       STATUS.SUCCESS,
+  //     ),
+  //   );
+  // }, [
+  //   onCloseConfirmPinCodeModal,
+  //   onToggleShowBalance,
+  //   resetConfirmPinCodeForm,
+  //   toast,
+  // ]);
 
-  const handleConfirmPinCodeError = useCallback(() => {
-    toast(
-      customToast(
-        ERROR_MESSAGES.CONFIRM_PIN_CODE.title,
-        ERROR_MESSAGES.CONFIRM_PIN_CODE.description,
-        STATUS.ERROR,
-      ),
-    );
-    resetConfirmPinCodeForm();
-  }, [resetConfirmPinCodeForm, toast]);
+  // const handleConfirmPinCodeError = useCallback(() => {
+  //   toast(
+  //     customToast(
+  //       ERROR_MESSAGES.CONFIRM_PIN_CODE.title,
+  //       ERROR_MESSAGES.CONFIRM_PIN_CODE.description,
+  //       STATUS.ERROR,
+  //     ),
+  //   );
+  //   resetConfirmPinCodeForm();
+  // }, [resetConfirmPinCodeForm, toast]);
 
   const onSubmitPinCode: SubmitHandler<TPinCodeForm> = useCallback(
     async (data) => {
-      if (user) {
-        data.userId = user.id;
-        if (!user?.pinCode) {
-          setNewPinCode(data, {
-            onSuccess: () => handleSetNewPinCodeSuccess(user, data.pinCode),
-            onError: handleSetNewPinCodeError,
-          });
+      const pinCode = data.pinCode;
+      userPinCode
+        ? onConfirmPinCode(pinCode, resetConfirmPinCodeForm)
+        : onSetNewPinCode(pinCode, resetSetPinCodeForm);
 
-          // try {
-          //   await handleSetPinCode(data);
-
-          //   setUser({ user: { ...user, pinCode: data.pinCode } });
-
-          //   onCloseSetPinCodeModal();
-
-          //   resetSetPinCodeForm();
-
-          //   toast(
-          //     customToast(
-          //       SUCCESS_MESSAGES.SET_PIN_CODE.title,
-          //       SUCCESS_MESSAGES.SET_PIN_CODE.description,
-          //       STATUS.SUCCESS,
-          //     ),
-          //   );
-          // } catch (error) {
-          //   toast(
-          //     customToast(
-          //       SUCCESS_MESSAGES.SET_PIN_CODE.title,
-          //       SUCCESS_MESSAGES.SET_PIN_CODE.description,
-          //       STATUS.SUCCESS,
-          //     ),
-          //   );
-          // }
-        } else {
-          confirmPinCode(data, {
-            onSuccess: handleConfirmPinCodeSuccess,
-            onError: handleConfirmPinCodeError,
-          });
-
-          // try {
-          //   await handleConfirmPinCode(data);
-          //   onCloseConfirmPinCodeModal();
-          //   resetConfirmPinCodeForm({
-          //     pinCode: '',
-          //   });
-          //   onToggleShowBalance();
-
-          //   toast(
-          //     customToast(
-          //       SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
-          //       SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
-          //       STATUS.SUCCESS,
-          //     ),
-          //   );
-          // } catch (error) {
-          //   toast(
-          //     customToast(
-          //       ERROR_MESSAGES.CONFIRM_PIN_CODE.title,
-          //       ERROR_MESSAGES.CONFIRM_PIN_CODE.description,
-          //       STATUS.ERROR,
-          //     ),
-          //   ),
-          //     resetConfirmPinCodeForm();
-          // }
-        }
-      }
+      // if (user) {
+      //   data.userId = user.id;
+      //   if (!user?.pinCode) {
+      //     setNewPinCode(data, {
+      //       onSuccess: () => handleSetNewPinCodeSuccess(user, data.pinCode),
+      //       onError: handleSetNewPinCodeError,
+      //     });
+      // try {
+      //   await handleSetPinCode(data);
+      //   setUser({ user: { ...user, pinCode: data.pinCode } });
+      //   onCloseSetPinCodeModal();
+      //   resetSetPinCodeForm();
+      //   toast(
+      //     customToast(
+      //       SUCCESS_MESSAGES.SET_PIN_CODE.title,
+      //       SUCCESS_MESSAGES.SET_PIN_CODE.description,
+      //       STATUS.SUCCESS,
+      //     ),
+      //   );
+      // } catch (error) {
+      //   toast(
+      //     customToast(
+      //       SUCCESS_MESSAGES.SET_PIN_CODE.title,
+      //       SUCCESS_MESSAGES.SET_PIN_CODE.description,
+      //       STATUS.SUCCESS,
+      //     ),
+      //   );
+      // }
+      // } else {
+      //   confirmPinCode(data, {
+      //     onSuccess: handleConfirmPinCodeSuccess,
+      //     onError: handleConfirmPinCodeError,
+      //   });
+      // try {
+      //   await handleConfirmPinCode(data);
+      //   onCloseConfirmPinCodeModal();
+      //   resetConfirmPinCodeForm({
+      //     pinCode: '',
+      //   });
+      //   onToggleShowBalance();
+      //   toast(
+      //     customToast(
+      //       SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
+      //       SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
+      //       STATUS.SUCCESS,
+      //     ),
+      //   );
+      // } catch (error) {
+      //   toast(
+      //     customToast(
+      //       ERROR_MESSAGES.CONFIRM_PIN_CODE.title,
+      //       ERROR_MESSAGES.CONFIRM_PIN_CODE.description,
+      //       STATUS.ERROR,
+      //     ),
+      //   ),
+      //     resetConfirmPinCodeForm();
+      // }
+      //   }
+      // }
     },
     [
-      confirmPinCode,
-      handleConfirmPinCodeError,
-      handleConfirmPinCodeSuccess,
-      handleSetNewPinCodeError,
-      handleSetNewPinCodeSuccess,
-      setNewPinCode,
-      user,
+      onConfirmPinCode,
+      onSetNewPinCode,
+      resetConfirmPinCodeForm,
+      resetSetPinCodeForm,
+      userPinCode,
     ],
   );
 
@@ -258,19 +264,19 @@ const Card = ({ balance }: TCardProps) => {
 
   const pinCodeModalBody = useMemo(
     () =>
-      user?.pinCode ? (
+      userPinCode ? (
         <PinCode
           control={confirmPinCodeControl}
-          isDisabled={!isConfirmValid || isConfirmPinCode}
-          isLoading={isConfirmPinCode}
+          isDisabled={!isConfirmValid || isLoadingConfirmPinCode}
+          isLoading={isLoadingConfirmPinCode}
           onSubmit={handleSubmitConfirmPinCode(onSubmitPinCode)}
           onClose={handleCloseConfirmPinCodeModal}
         />
       ) : (
         <PinCode
           control={setPinCodeControl}
-          isDisabled={!isSetValid || isSetNewPinCode}
-          isLoading={isSetNewPinCode}
+          isDisabled={!isSetValid || isLoadingSetPinCode}
+          isLoading={isLoadingSetPinCode}
           onSubmit={handleSubmitSetPinCode(onSubmitPinCode)}
           onClose={handleCloseSetPinCodeModal}
         />
@@ -281,13 +287,13 @@ const Card = ({ balance }: TCardProps) => {
       handleCloseSetPinCodeModal,
       handleSubmitConfirmPinCode,
       handleSubmitSetPinCode,
-      isConfirmPinCode,
       isConfirmValid,
-      isSetNewPinCode,
+      isLoadingConfirmPinCode,
+      isLoadingSetPinCode,
       isSetValid,
       onSubmitPinCode,
       setPinCodeControl,
-      user?.pinCode,
+      userPinCode,
     ],
   );
 
