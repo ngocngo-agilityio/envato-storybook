@@ -80,30 +80,6 @@ const CheckPinCodeProvider = () => {
           onSuccess: () => handleSetNewPinCodeSuccess(user, data.pinCode),
           onError: handleSetNewPinCodeError,
         });
-
-        // try {
-        //   handleSetPinCode(data);
-
-        //   setUser({ user: { ...user, pinCode: data.pinCode } });
-
-        //   onClosePinCodeModal();
-
-        //   toast(
-        //     customToast(
-        //       SUCCESS_MESSAGES.SET_PIN_CODE.title,
-        //       SUCCESS_MESSAGES.SET_PIN_CODE.description,
-        //       STATUS.SUCCESS,
-        //     ),
-        //   );
-        // } catch (error) {
-        //   toast(
-        //     customToast(
-        //       ERROR_MESSAGES.SET_PIN_CODE.title,
-        //       ERROR_MESSAGES.SET_PIN_CODE.description,
-        //       STATUS.ERROR,
-        //     ),
-        //   );
-        // }
       }
     },
     [handleSetNewPinCodeError, handleSetNewPinCodeSuccess, setNewPinCode, user],

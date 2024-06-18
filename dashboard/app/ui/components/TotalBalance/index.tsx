@@ -232,64 +232,11 @@ const TotalBalance = (): JSX.Element => {
             onSuccess: () => handleSetNewPinCodeSuccess(user, data.pinCode),
             onError: handleSetNewPinCodeError,
           });
-          // try {
-          //   await handleSetPinCode(data);
-
-          //   setUser({ user: { ...user, pinCode: data.pinCode } });
-
-          //   onCloseSetPinCodeModal();
-
-          //   resetSetPinCodeForm();
-
-          //   toast(
-          //     customToast(
-          //       SUCCESS_MESSAGES.SET_PIN_CODE.title,
-          //       SUCCESS_MESSAGES.SET_PIN_CODE.description,
-          //       STATUS.SUCCESS,
-          //     ),
-          //   );
-          // } catch (error) {
-          //   toast(
-          //     customToast(
-          //       ERROR_MESSAGES.SET_PIN_CODE.title,
-          //       ERROR_MESSAGES.SET_PIN_CODE.description,
-          //       STATUS.ERROR,
-          //     ),
-          //   );
-          // }
         } else {
           confirmPinCode(data, {
             onSuccess: handleConfirmPinCodeSuccess,
             onError: handleConfirmPinCodeError,
           });
-
-          // try {
-          //   await handleConfirmPinCode(data);
-          //   onCloseConfirmPinCodeModal();
-          //   resetConfirmPinCodeForm({
-          //     pinCode: '',
-          //   });
-
-          //   await handleSubmitAddMoney(onSubmitAddMoney)();
-          //   resetAddMoneyForm();
-
-          //   toast(
-          //     customToast(
-          //       SUCCESS_MESSAGES.CONFIRM_PIN_CODE.title,
-          //       SUCCESS_MESSAGES.CONFIRM_PIN_CODE.description,
-          //       STATUS.SUCCESS,
-          //     ),
-          //   );
-          // } catch (error) {
-          //   toast(
-          //     customToast(
-          //       ERROR_MESSAGES.CONFIRM_PIN_CODE.title,
-          //       ERROR_MESSAGES.CONFIRM_PIN_CODE.description,
-          //       STATUS.ERROR,
-          //     ),
-          //   );
-          //   resetConfirmPinCodeForm();
-          // }
         }
       }
     },
@@ -339,26 +286,6 @@ const TotalBalance = (): JSX.Element => {
           </Button>
         </form>
       </Box>
-
-      {/*Set PIN code Modal */}
-      {/* {isSetPinCodeModalOpen && (
-        <Modal
-          title="Please set the PIN code to your account"
-          isOpen={isSetPinCodeModalOpen}
-          onClose={handleCloseSetPinCodeModal}
-          body={pinCodeModalBody}
-        />
-      )} */}
-
-      {/*Confirm PIN code Modal */}
-      {/* {isConfirmPinCodeModalOpen && (
-        <Modal
-          title="Please enter your PIN code"
-          isOpen={isConfirmPinCodeModalOpen}
-          onClose={handleCloseConfirmPinCodeModal}
-          body={pinCodeModalBody}
-        />
-      )} */}
       <PinCodeModal
         title={
           isSetPinCodeModalOpen

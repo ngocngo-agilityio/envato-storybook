@@ -1,4 +1,6 @@
 // Libs
+
+import { useCallback } from 'react';
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
 
@@ -10,15 +12,20 @@ import {
   SUCCESS_MESSAGES,
 } from '@/lib/constants';
 
+// Utils
+import { customToast, logActivity } from '@/lib/utils';
+
 // Services
 import { mainHttpService } from '@/lib/services';
 
+// Stores
+import { TAuthStoreData, authStore } from '@/lib/stores';
+
+// Hooks
+import { useAuth } from '@/lib/hooks';
+
 // Types
 import { EActivity, TPinCodeForm } from '@/lib/interfaces';
-import { customToast, logActivity } from '../utils';
-import { useCallback } from 'react';
-import { TAuthStoreData, authStore } from '../stores';
-import { useAuth } from './useAuth';
 
 export type PinCodeResponse = {
   message: string;
@@ -43,10 +50,10 @@ export const usePinCode = () => {
   });
 
   const { mutate: confirmPinCode, isPending: isConfirmPinCode } = useMutation({
-    mutationFn: async (data: TPinCodeForm) => {
+    mutationFn: (data: TPinCodeForm) => {
       const { userId, pinCode } = data || {};
 
-      return await mainHttpService.post<PinCodeResponse>({
+      return mainHttpService.post<PinCodeResponse>({
         path: END_POINTS.CONFIRM_PIN,
         data: {
           pinCode,
