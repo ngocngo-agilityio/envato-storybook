@@ -166,26 +166,37 @@ export const useSubmitPinCode = () => {
     [toast],
   );
 
-  const handleSubmitPinCode = (pinCode: string, callback?: () => void) => {
-    const payload = {
-      userId,
-      pinCode,
-    };
+  const handleSubmitPinCode = useCallback(
+    (pinCode: string, callback?: () => void) => {
+      const payload = {
+        userId,
+        pinCode,
+      };
 
-    if (pinCode) {
-      confirmPinCode(payload, {
-        onSuccess: () => handleConfirmPinCodeSuccess(callback),
-        onError: () => handleConfirmPinCodeError(callback),
+      if (pinCode) {
+        confirmPinCode(payload, {
+          onSuccess: () => handleConfirmPinCodeSuccess(callback),
+          onError: () => handleConfirmPinCodeError(callback),
+        });
+
+        return;
+      }
+
+      setNewPinCode(payload, {
+        onSuccess: () => handleSetNewPinCodeSuccess(pinCode, callback),
+        onError: () => handleSetNewPinCodeError(callback),
       });
-
-      return;
-    }
-
-    setNewPinCode(payload, {
-      onSuccess: () => handleSetNewPinCodeSuccess(pinCode, callback),
-      onError: () => handleSetNewPinCodeError(callback),
-    });
-  };
+    },
+    [
+      confirmPinCode,
+      handleConfirmPinCodeError,
+      handleConfirmPinCodeSuccess,
+      handleSetNewPinCodeError,
+      handleSetNewPinCodeSuccess,
+      setNewPinCode,
+      userId,
+    ],
+  );
 
   return {
     isLoadingPinCode: isSetNewPinCode || isConfirmPinCode,

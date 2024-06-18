@@ -48,12 +48,12 @@ const TotalBalance = (): JSX.Element => {
     isConfirmPinCode,
     setNewPinCode,
     confirmPinCode,
-    isConfirmPinCodeModalOpen,
     isSetPinCodeModalOpen,
-    onCloseConfirmPinCodeModal,
     onCloseSetPinCodeModal,
-    onOpenConfirmPinCodeModal,
     onOpenSetPinCodeModal,
+    isConfirmPinCodeModalOpen,
+    onCloseConfirmPinCodeModal,
+    onOpenConfirmPinCodeModal,
   } = usePinCode();
 
   const {
