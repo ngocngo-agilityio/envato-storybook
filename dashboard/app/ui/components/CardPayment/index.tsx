@@ -21,7 +21,6 @@ import {
   useGetUserDetails,
   useMoney,
   usePinCode,
-  useWallet,
 } from '@/lib/hooks';
 
 // Stores
@@ -49,27 +48,9 @@ export type TTransfer = {
   userId: string;
 };
 
-interface CardPaymentProps {
-  userPinCode: string;
-  isLoadingPinCode: boolean;
-  onSubmitPinCodeForm: (pinCode: string, callback?: () => void) => void;
-  isPinCodeModalOpen: boolean;
-  onTogglePinCodeModal: () => void;
-  isShowBalance: boolean;
-  onToggleShowBalance: () => void;
-}
-
 const REQUIRE_FIELDS = ['amount', 'memberId'];
 
-const CardPayment = ({
-  userPinCode,
-  isLoadingPinCode,
-  isPinCodeModalOpen,
-  onTogglePinCodeModal,
-  isShowBalance,
-  onToggleShowBalance,
-  onSubmitPinCodeForm,
-}: CardPaymentProps): JSX.Element => {
+const CardPayment = (): JSX.Element => {
   const user = authStore((state) => state.user);
 
   const { setUser } = useAuth();
@@ -93,8 +74,6 @@ const CardPayment = ({
     (key) => dirtyFields[key as keyof TTransfer],
   );
   const shouldEnable = isEnableSubmitButton(REQUIRE_FIELDS, dirtyItems);
-
-  const { currentWalletMoney } = useWallet(user?.id);
 
   const { filterDataUser } = useGetUserDetails(user?.id || '');
 
@@ -333,16 +312,7 @@ const CardPayment = ({
           my wallet
         </Heading>
 
-        <CardBalance
-          balance={currentWalletMoney?.balance || 0}
-          isLoadingPinCode={isLoadingPinCode}
-          userPinCode={userPinCode}
-          onSubmitPinCode={onSubmitPinCodeForm}
-          isPinCodeModalOpen={isPinCodeModalOpen}
-          onTogglePinCodeModal={onTogglePinCodeModal}
-          isShowBalance={isShowBalance}
-          onToggleShowBalance={onToggleShowBalance}
-        />
+        <CardBalance />
 
         <Box
           as="form"
