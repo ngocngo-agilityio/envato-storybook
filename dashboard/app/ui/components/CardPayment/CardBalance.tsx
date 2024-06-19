@@ -1,5 +1,5 @@
 // Libs
-import { ReactElement, memo, useCallback } from 'react';
+import { ReactElement, memo } from 'react';
 import { Center, Flex, IconButton, Text } from '@chakra-ui/react';
 
 // Components
@@ -22,31 +22,18 @@ type TBalanceStatus = {
 export type TCardProps = {
   balance: number;
   isShowBalance: boolean;
-  onTogglePinCodeModal: () => void;
   onToggleShowBalance: () => void;
 };
 
 const CardBalance = ({
   balance,
   isShowBalance,
-  onTogglePinCodeModal,
   onToggleShowBalance,
 }: TCardProps) => {
   const { iconBalance, balance: balanceStatus }: TBalanceStatus = {
     iconBalance: isShowBalance ? <EyeSlash /> : <Eye />,
     balance: isShowBalance ? `$${formatDecimalNumber(balance)}` : '******',
   };
-
-  const handleToggleShowBalance = useCallback(() => {
-    if (isShowBalance) {
-      onToggleShowBalance();
-
-      return;
-    }
-
-    // Open Pin Code modal
-    onTogglePinCodeModal();
-  }, [isShowBalance, onTogglePinCodeModal, onToggleShowBalance]);
 
   return (
     <Center>
@@ -72,7 +59,7 @@ const CardBalance = ({
             icon={iconBalance}
             w="fit-content"
             bg="none"
-            onClick={handleToggleShowBalance}
+            onClick={onToggleShowBalance}
             sx={{
               _hover: {
                 bg: 'none',

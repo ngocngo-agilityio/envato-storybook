@@ -24,7 +24,6 @@ import { PinCodeModal } from '@/ui/components';
 export type TWithPinCode<T> = {
   isShowBalance: boolean;
   onToggleShowBalance: () => void;
-  onTogglePinCodeModal: () => void;
   balance: number;
 } & T;
 
@@ -165,13 +164,23 @@ const withBalance = <T,>(
       resetPinCodeForm();
     }, [onTogglePinCodeModal, resetPinCodeForm]);
 
+    const handleToggleShowBalance = useCallback(() => {
+      if (isShowBalance) {
+        onToggleShowBalance();
+
+        return;
+      }
+
+      // Open Pin Code modal
+      onTogglePinCodeModal();
+    }, [isShowBalance, onTogglePinCodeModal, onToggleShowBalance]);
+
     return (
       <>
         <WrappedComponent
           balance={balance}
           isShowBalance={isShowBalance}
-          onToggleShowBalance={onToggleShowBalance}
-          onTogglePinCodeModal={onTogglePinCodeModal}
+          onToggleShowBalance={handleToggleShowBalance}
           {...props}
         />
         {isPinCodeModalOpen && (
