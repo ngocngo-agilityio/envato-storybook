@@ -1,12 +1,7 @@
 // Libs
 import { ReactNode, useCallback } from 'react';
 import { useDisclosure, useToast } from '@chakra-ui/react';
-import {
-  Control,
-  SubmitHandler,
-  UseFormHandleSubmit,
-  useForm,
-} from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 // Stores
 import { authStore } from '@/lib/stores';
@@ -21,31 +16,13 @@ import { ERROR_MESSAGES, STATUS, SUCCESS_MESSAGES } from '@/lib/constants';
 import { customToast, removeAmountFormat } from '@/lib/utils';
 
 // Types
-import {
-  TPinCodeForm,
-  TTransfer,
-  TTransferDirtyFields,
-  TUserDetail,
-} from '@/lib/interfaces';
+import { TPinCodeForm, TTransfer, TWithSendMoney } from '@/lib/interfaces';
 
 // Components
 import { PinCodeModal } from '@/ui/components';
 
-export type TSendMoney<T> = {
-  control: Control<TTransfer>;
-  dirtyFields: TTransferDirtyFields;
-  userList: Array<
-    Omit<TUserDetail, 'id'> & {
-      _id: string;
-    }
-  >;
-  isSendMoneySubmitting: boolean;
-  onSubmitSendMoneyHandler: UseFormHandleSubmit<TTransfer>;
-  onSubmitSendMoney: () => void;
-} & T;
-
 const withBalance = <T,>(
-  WrappedComponent: (props: TSendMoney<T>) => ReactNode,
+  WrappedComponent: (props: TWithSendMoney<T>) => ReactNode,
 ) => {
   const BalanceWrapper = (props: T) => {
     const toast = useToast();

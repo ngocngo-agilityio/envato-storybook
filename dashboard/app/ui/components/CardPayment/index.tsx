@@ -2,7 +2,6 @@
 
 import { memo } from 'react';
 import { Box, Heading } from '@chakra-ui/react';
-import { Control, UseFormHandleSubmit } from 'react-hook-form';
 import isEqual from 'react-fast-compare';
 
 // Components
@@ -17,25 +16,9 @@ import { isEnableSubmitButton } from '@/lib/utils';
 import { withSendMoney } from '@/lib/hocs';
 
 // Types
-import {
-  TPinCodeForm,
-  TTransfer,
-  TTransferDirtyFields,
-  TUserDetail,
-} from '@/lib/interfaces';
+import { TTransfer, TWithSendMoney } from '@/lib/interfaces';
 
-interface CardPaymentProps {
-  control: Control<TTransfer>;
-  dirtyFields: TTransferDirtyFields;
-  userList: Array<
-    Omit<TUserDetail, 'id'> & {
-      _id: string;
-    }
-  >;
-  isSendMoneySubmitting: boolean;
-  onSubmitSendMoneyHandler: UseFormHandleSubmit<TPinCodeForm>;
-  onSubmitSendMoney: () => void;
-}
+interface CardPaymentProps {}
 
 const REQUIRE_FIELDS = ['amount', 'memberId'];
 
@@ -46,7 +29,7 @@ const CardPayment = ({
   isSendMoneySubmitting,
   onSubmitSendMoneyHandler,
   onSubmitSendMoney,
-}: CardPaymentProps): JSX.Element => {
+}: TWithSendMoney<CardPaymentProps>): JSX.Element => {
   const dirtyItems = Object.keys(dirtyFields).filter(
     (key) => dirtyFields[key as keyof TTransfer],
   );
