@@ -319,6 +319,7 @@ export const USER_DETAIL_MOCK = [
     createdAt: 3123123,
     isBlock: false,
     uid: '1',
+    bonusTimes: 10,
   },
 ];
 
