@@ -5,7 +5,7 @@ import { AUTHENTICATION_ROLE } from '@/lib/constants';
 import { renderQueryProviderTest } from '@/lib/utils';
 
 // Mocks
-import { USER_DETAIL_MOCK } from '@/lib/mocks';
+import { MOCK_USERS } from '@/lib/mocks';
 
 // Components
 import Header from '@/ui/layouts/Header';
@@ -13,12 +13,12 @@ import Header from '@/ui/layouts/Header';
 const mockSignOut = jest.fn();
 
 const mockProps = {
-  userId: USER_DETAIL_MOCK[0].uid,
-  firstName: USER_DETAIL_MOCK[0].firstName,
-  lastName: USER_DETAIL_MOCK[0].lastName,
-  role: USER_DETAIL_MOCK[0].role,
-  avatarURL: USER_DETAIL_MOCK[0].avatarURL,
-  bonusTimes: USER_DETAIL_MOCK[0].bonusTimes,
+  userId: MOCK_USERS[0].uid,
+  firstName: MOCK_USERS[0].firstName,
+  lastName: MOCK_USERS[0].lastName,
+  role: MOCK_USERS[0].role,
+  avatarURL: MOCK_USERS[0].avatarURL,
+  bonusTimes: MOCK_USERS[0].bonusTimes,
   onSignOut: mockSignOut,
 };
 
