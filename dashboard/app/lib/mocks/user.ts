@@ -300,7 +300,7 @@ export const MOCK_USER_DETAIL_WITHOUT_IMAGE: TUserDetail = {
   isBlock: false,
 };
 
-export const USER_DETAIL_MOCK = [
+export const MOCK_USERS = [
   {
     _id: '1',
     title: 'What is the issues',
@@ -319,6 +319,7 @@ export const USER_DETAIL_MOCK = [
     createdAt: 3123123,
     isBlock: false,
     uid: '1',
+    bonusTimes: 10,
   },
 ];
 
@@ -544,7 +545,7 @@ export const MOCK_ISSUES_RES = {
 };
 
 export const MOCK_USER_DETAILS_RES = {
-  data: [USER_DETAIL_MOCK],
+  data: MOCK_USERS,
   status: 200,
   statusText: 'Ok',
   headers: {},

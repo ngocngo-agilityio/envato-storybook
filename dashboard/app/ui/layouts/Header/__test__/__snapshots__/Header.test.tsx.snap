@@ -1,5 +1,798 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Header component Should render match with snapshot. 1`] = `
+<div>
+  <div
+    class="css-2urpt7"
+  >
+    <div
+      class="css-sfv4qq"
+    >
+      <div
+        class="css-0"
+      >
+        <div
+          class="css-1da2ac5"
+        >
+          <a
+            aria-label="link-to-home"
+            class="chakra-text css-yvk6u4"
+            href="/"
+          >
+            <svg
+              fill="none"
+              height="52"
+              viewBox="0 0 172 52"
+              width="172"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 12.861C1 6.86259 5.92485 2 12 2C18.0752 2 23 6.86259 23 12.861V15.7998C21.1579 15.0719 19.1471 14.6711 17.0417 14.6711C8.18205 14.6711 1 21.7624 1 30.51V12.861Z"
+                fill="#22C55E"
+              />
+              <path
+                clip-rule="evenodd"
+                d="M17 46.5088C25.8366 46.5088 33 39.3453 33 30.5088C33 21.6722 25.8366 14.5088 17 14.5088C8.16344 14.5088 1 21.6722 1 30.5088C1 39.3453 8.16344 46.5088 17 46.5088ZM17 38.7374C21.5445 38.7374 25.2286 35.0533 25.2286 30.5088C25.2286 25.9643 21.5445 22.2802 17 22.2802C12.4555 22.2802 8.77143 25.9643 8.77143 30.5088C8.77143 35.0533 12.4555 38.7374 17 38.7374Z"
+                fill="#1A202C"
+                fill-rule="evenodd"
+              />
+              <path
+                d="M41.796 36V13.6H50.132C51.3373 13.6 52.4306 13.8507 53.412 14.352C54.3933 14.8427 55.1666 15.5467 55.732 16.464C56.308 17.3813 56.596 18.4587 56.596 19.696C56.596 20.1973 56.5266 20.7147 56.388 21.248C56.26 21.7813 56.036 22.272 55.716 22.72C55.4066 23.168 54.98 23.5093 54.436 23.744C55.14 23.9147 55.7053 24.2347 56.132 24.704C56.5586 25.1627 56.884 25.696 57.108 26.304C57.332 26.9013 57.4813 27.5147 57.556 28.144C57.6306 28.7733 57.668 29.344 57.668 29.856C57.668 31.008 57.3693 32.048 56.772 32.976C56.1746 33.904 55.3693 34.64 54.356 35.184C53.3533 35.728 52.244 36 51.028 36H41.796ZM46.212 32.24H50.564C51.1506 32.24 51.684 32.1013 52.164 31.824C52.644 31.536 53.028 31.1467 53.316 30.656C53.604 30.1547 53.748 29.5893 53.748 28.96C53.748 28.4267 53.604 27.92 53.316 27.44C53.028 26.96 52.644 26.5707 52.164 26.272C51.684 25.9627 51.1506 25.808 50.564 25.808H46.212V32.24ZM46.212 22.128H49.62C50.324 22.128 50.9266 21.8987 51.428 21.44C51.9293 20.9813 52.18 20.3893 52.18 19.664C52.18 18.9173 51.9293 18.352 51.428 17.968C50.9266 17.5733 50.324 17.376 49.62 17.376H46.212V22.128ZM70.7362 20H75.1522V36H70.7202L70.5122 34.336C70.0962 34.9547 69.5629 35.456 68.9122 35.84C68.2616 36.224 67.4989 36.416 66.6242 36.416C65.4296 36.416 64.3149 36.192 63.2802 35.744C62.2456 35.296 61.3336 34.6773 60.5442 33.888C59.7549 33.0987 59.1362 32.1867 58.6882 31.152C58.2509 30.1067 58.0322 28.9867 58.0322 27.792C58.0322 26.6507 58.2402 25.584 58.6562 24.592C59.0722 23.6 59.6589 22.7253 60.4162 21.968C61.1736 21.2107 62.0429 20.6187 63.0242 20.192C64.0162 19.7653 65.0829 19.552 66.2242 19.552C67.2056 19.552 68.0856 19.76 68.8642 20.176C69.6536 20.592 70.3416 21.12 70.9282 21.76L70.7362 20ZM66.5122 32.176C67.2376 32.176 67.8936 31.9893 68.4802 31.616C69.0669 31.2427 69.5309 30.7413 69.8722 30.112C70.2136 29.472 70.3842 28.768 70.3842 28C70.3842 27.2213 70.2136 26.5173 69.8722 25.888C69.5309 25.2587 69.0669 24.7573 68.4802 24.384C67.8936 24.0107 67.2376 23.824 66.5122 23.824C65.7762 23.824 65.1096 24.0107 64.5122 24.384C63.9149 24.7573 63.4402 25.264 63.0882 25.904C62.7362 26.5333 62.5602 27.232 62.5602 28C62.5602 28.768 62.7362 29.472 63.0882 30.112C63.4509 30.7413 63.9309 31.2427 64.5282 31.616C65.1256 31.9893 65.7869 32.176 66.5122 32.176ZM92.2712 25.824V36H87.8552V27.04C87.8552 26.4747 87.7166 25.968 87.4392 25.52C87.1726 25.0613 86.8099 24.6987 86.3512 24.432C85.9032 24.1653 85.4019 24.032 84.8472 24.032C84.2926 24.032 83.7859 24.1653 83.3272 24.432C82.8686 24.6987 82.5059 25.0613 82.2392 25.52C81.9726 25.968 81.8392 26.4747 81.8392 27.04V36H77.4232L77.4072 20H81.8232L81.8392 21.184C82.3726 20.672 82.9966 20.272 83.7112 19.984C84.4366 19.696 85.1992 19.552 85.9992 19.552C87.1619 19.552 88.2126 19.8347 89.1512 20.4C90.1006 20.9653 90.8579 21.7227 91.4232 22.672C91.9886 23.6107 92.2712 24.6613 92.2712 25.824ZM109.389 36H104.301L100.909 30.16L98.957 32.48V36H94.541V12H98.957V25.616L103.661 20H109.421L103.933 26.576L109.389 36Z"
+                fill="#1A202C"
+              />
+              <path
+                d="M121.511 36.416C119.997 36.416 118.573 36.1173 117.239 35.52C115.906 34.912 114.733 34.0747 113.719 33.008C112.717 31.9413 111.927 30.7093 111.351 29.312C110.786 27.904 110.503 26.4 110.503 24.8C110.503 23.1893 110.786 21.6853 111.351 20.288C111.927 18.88 112.717 17.648 113.719 16.592C114.733 15.5253 115.906 14.6933 117.239 14.096C118.573 13.488 119.997 13.184 121.511 13.184C123.325 13.184 124.994 13.6053 126.519 14.448C128.045 15.28 129.309 16.3947 130.311 17.792L126.375 19.92C125.778 19.216 125.058 18.656 124.215 18.24C123.373 17.8133 122.471 17.6 121.511 17.6C120.605 17.6 119.751 17.7867 118.951 18.16C118.151 18.5333 117.447 19.0507 116.839 19.712C116.242 20.3733 115.773 21.136 115.431 22C115.09 22.864 114.919 23.7973 114.919 24.8C114.919 25.792 115.09 26.7253 115.431 27.6C115.773 28.464 116.242 29.2267 116.839 29.888C117.447 30.5387 118.151 31.056 118.951 31.44C119.751 31.8133 120.605 32 121.511 32C122.482 32 123.383 31.7867 124.215 31.36C125.058 30.9333 125.778 30.368 126.375 29.664L130.311 31.808C129.309 33.1947 128.045 34.3093 126.519 35.152C124.994 35.9947 123.325 36.416 121.511 36.416ZM138.505 36.416C137.033 36.416 135.689 36.0373 134.473 35.28C133.267 34.5227 132.302 33.5093 131.577 32.24C130.862 30.96 130.505 29.5467 130.505 28C130.505 26.8267 130.713 25.7333 131.129 24.72C131.545 23.696 132.115 22.8 132.841 22.032C133.577 21.2533 134.43 20.6453 135.401 20.208C136.371 19.7707 137.406 19.552 138.505 19.552C139.977 19.552 141.315 19.9307 142.521 20.688C143.737 21.4453 144.702 22.464 145.417 23.744C146.142 25.024 146.505 26.4427 146.505 28C146.505 29.1627 146.297 30.2507 145.881 31.264C145.465 32.2773 144.889 33.1733 144.153 33.952C143.427 34.72 142.579 35.3227 141.609 35.76C140.649 36.1973 139.614 36.416 138.505 36.416ZM138.505 32C139.187 32 139.801 31.8187 140.345 31.456C140.889 31.0827 141.315 30.592 141.625 29.984C141.934 29.376 142.089 28.7147 142.089 28C142.089 27.264 141.923 26.592 141.593 25.984C141.273 25.3653 140.841 24.8747 140.297 24.512C139.753 24.1493 139.155 23.968 138.505 23.968C137.833 23.968 137.225 24.1547 136.681 24.528C136.137 24.9013 135.705 25.392 135.385 26C135.075 26.608 134.921 27.2747 134.921 28C134.921 28.7573 135.081 29.44 135.401 30.048C135.731 30.6453 136.169 31.12 136.713 31.472C137.257 31.824 137.854 32 138.505 32ZM149.682 36.416C149.064 36.416 148.536 36.2027 148.098 35.776C147.672 35.3387 147.458 34.8053 147.458 34.176C147.458 33.568 147.672 33.0453 148.098 32.608C148.536 32.1707 149.064 31.952 149.682 31.952C150.301 31.952 150.829 32.1707 151.266 32.608C151.704 33.0453 151.922 33.568 151.922 34.176C151.922 34.8053 151.704 35.3387 151.266 35.776C150.829 36.2027 150.301 36.416 149.682 36.416Z"
+                fill="#22C55E"
+              />
+            </svg>
+          </a>
+        </div>
+        <h1
+          class="chakra-heading css-10yljm9"
+        >
+          Dashboards
+        </h1>
+        <p
+          class="chakra-text css-1l1aq7x"
+        >
+          Let’s check your update today
+        </p>
+      </div>
+      <div
+        class="css-bbd869"
+      >
+        <div
+          class="css-0"
+        >
+          <button
+            aria-controls="menu-list-:r1:"
+            aria-expanded="false"
+            aria-haspopup="menu"
+            class="chakra-button chakra-menu__menu-button css-1of25bg"
+            id="menu-button-:r1:"
+            title="Abdur Rohman"
+            type="button"
+          >
+            <span
+              class="css-xl71ch"
+            >
+              <div
+                class="css-70qvj9"
+              >
+                <div
+                  class="css-1t7qp8j"
+                >
+                  <img
+                    alt=""
+                    data-nimg="fill"
+                    decoding="async"
+                    loading="lazy"
+                    sizes="100vw"
+                    src="/_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=3840&q=75"
+                    srcset="/_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=3840&q=75 3840w"
+                    style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; object-fit: cover; color: transparent; border-radius: 12px; border-width: 1px; padding-top: 2px; cursor: pointer; border-color: #e2e8f0; background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;"
+                  />
+                </div>
+                <div
+                  class="css-1unxso2"
+                >
+                  <div
+                    class="css-1f25a08"
+                  >
+                    <div
+                      class="css-70qvj9"
+                    >
+                      <p
+                        class="chakra-text css-9sqk9o"
+                      >
+                        Abdur Rohman
+                      </p>
+                      <svg
+                        fill="none"
+                        height="24"
+                        stroke="#1A202C"
+                        style="transform: rotate(undefined);"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7 10L12 14L17 10"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                        />
+                      </svg>
+                    </div>
+                    <p
+                      class="chakra-text css-179zs4q"
+                    />
+                  </div>
+                </div>
+              </div>
+            </span>
+          </button>
+          <div
+            class="css-lnyvlk"
+            style="visibility: hidden; position: absolute; min-width: max-content; inset: 0 auto auto 0;"
+          >
+            <div
+              aria-orientation="vertical"
+              class="chakra-menu__menu-list css-16j8xku"
+              data-testid="TestDropdown"
+              id="menu-list-:r1:"
+              role="menu"
+              style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8) translateZ(0);"
+              tabindex="-1"
+            >
+              <a
+                aria-label="menu-icon-My profile"
+                class="chakra-link chakra-menu__menuitem css-1y28nxo"
+                data-index="0"
+                href="/settings"
+                id="menu-list-:r1:-menuitem-:r2:"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <div
+                  class="css-k008qs"
+                >
+                  <svg
+                    fill="none"
+                    height="24"
+                    stroke="#1A202C"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.1197 12.7805C12.0497 12.7705 11.9597 12.7705 11.8797 12.7805C10.1197 12.7205 8.71973 11.2805 8.71973 9.51047C8.71973 7.70047 10.1797 6.23047 11.9997 6.23047C13.8097 6.23047 15.2797 7.70047 15.2797 9.51047C15.2697 11.2805 13.8797 12.7205 12.1197 12.7805Z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      d="M18.7398 19.3796C16.9598 21.0096 14.5998 21.9996 11.9998 21.9996C9.39977 21.9996 7.03977 21.0096 5.25977 19.3796C5.35977 18.4396 5.95977 17.5196 7.02977 16.7996C9.76977 14.9796 14.2498 14.9796 16.9698 16.7996C18.0398 17.5196 18.6398 18.4396 18.7398 19.3796Z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                  <p
+                    class="chakra-text css-1c1tqaz"
+                  >
+                    My profile
+                  </p>
+                </div>
+              </a>
+              <hr
+                aria-orientation="horizontal"
+                class="chakra-divider css-1sulk9x"
+              />
+              <button
+                aria-label="menu-icon-Logout"
+                class="chakra-menu__menuitem css-1gjvndh"
+                data-index="1"
+                id="menu-list-:r1:-menuitem-:r3:"
+                role="menuitem"
+                tabindex="-1"
+                type="button"
+              >
+                <div
+                  class="css-k008qs"
+                >
+                  <svg
+                    fill="none"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15 10L13.7071 11.2929C13.3166 11.6834 13.3166 12.3166 13.7071 12.7071L15 14M14 12L22 12M6 20C3.79086 20 2 18.2091 2 16V8C2 5.79086 3.79086 4 6 4M6 20C8.20914 20 10 18.2091 10 16V8C10 5.79086 8.20914 4 6 4M6 20H14C16.2091 20 18 18.2091 18 16M6 4H14C16.2091 4 18 5.79086 18 8"
+                      stroke="#1A202C"
+                      stroke-linecap="round"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                  <p
+                    class="chakra-text css-1c1tqaz"
+                  >
+                    Logout
+                  </p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-v9bphm"
+    >
+      <div
+        class="css-k008qs"
+      >
+        <div
+          aria-hidden="false"
+          aria-modal="true"
+          class="css-1dz9t9j"
+        >
+          <div
+            class="css-1ve4u7y"
+            data-testid="icon-button-component"
+          >
+            <div
+              aria-label="switch-theme"
+              class="chakra-button css-8s8ddv"
+              data-testid="icon-button"
+              role="button"
+            >
+              <svg
+                fill="none"
+                height="24"
+                stroke="#1A202C"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18.3284 14.8687C13.249 14.8687 9.13135 10.751 9.13135 5.67163C9.13135 4.74246 9.26914 3.84548 9.5254 3C5.74897 4.14461 3 7.65276 3 11.803C3 16.8824 7.11765 21 12.197 21C16.3472 21 19.8554 18.251 21 14.4746C20.1545 14.7309 19.2575 14.8687 18.3284 14.8687Z"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            class="css-0"
+          >
+            <button
+              aria-controls="menu-list-:r5:"
+              aria-expanded="false"
+              aria-haspopup="menu"
+              class="chakra-button chakra-menu__menu-button css-1syuf9x"
+              data-testid="click-menu-button"
+              id="menu-button-:r5:"
+              type="button"
+            >
+              <span
+                class="css-xl71ch"
+              >
+                <div
+                  class="css-1ve4u7y"
+                  data-testid="icon-button-component"
+                >
+                  <div
+                    aria-label="new-notification"
+                    class="chakra-button css-8s8ddv"
+                    data-testid="icon-button"
+                    role="button"
+                  >
+                    <svg
+                      fill="#1A202C"
+                      height="25"
+                      viewBox="0 0 24 25"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M19.9718 6.78149L19.2803 7.07178L19.9718 6.78149ZM19.3571 7.25473C19.5174 7.63666 19.957 7.81631 20.3389 7.65599C20.7209 7.49567 20.9005 7.05609 20.7402 6.67416L19.3571 7.25473ZM16.7784 2.77061C16.3937 2.61687 15.9573 2.80404 15.8036 3.18867C15.6498 3.5733 15.837 4.00973 16.2216 4.16347L16.7784 2.77061ZM16.6672 3.53388L16.3889 4.23031L16.6672 3.53388ZM4.0768 6.78149L4.76834 7.07178L4.0768 6.78149ZM3.30846 6.67416C3.14813 7.05609 3.32778 7.49567 3.70971 7.65599C4.09164 7.81631 4.53122 7.63666 4.69154 7.25473L3.30846 6.67416ZM7.82701 4.16347C8.21164 4.00973 8.39881 3.5733 8.24507 3.18867C8.09134 2.80405 7.65491 2.61687 7.27028 2.77061L7.82701 4.16347ZM7.38142 3.53388L7.10305 2.83745V2.83745L7.38142 3.53388ZM18.2395 9.93743L17.4943 10.0221V10.0221L18.2395 9.93743ZM18.6867 13.8746L19.4319 13.7899V13.7899L18.6867 13.8746ZM5.31328 13.8746L4.56807 13.7899L5.31328 13.8746ZM5.76046 9.93743L6.50567 10.0221L5.76046 9.93743ZM4.44779 15.83L3.87686 15.3436H3.87686L4.44779 15.83ZM19.5522 15.83L18.9813 16.3164L18.9813 16.3164L19.5522 15.83ZM14.2699 5.33931H13.5199C13.5199 5.65996 13.7238 5.94513 14.0272 6.04893L14.2699 5.33931ZM9.73005 5.33931L9.97284 6.04893C10.2762 5.94513 10.4801 5.65996 10.4801 5.33931H9.73005ZM15.7022 21.2175C15.8477 20.8296 15.6512 20.3973 15.2634 20.2518C14.8755 20.1064 14.4432 20.3029 14.2978 20.6907L15.7022 21.2175ZM9.70223 20.6907C9.55678 20.3029 9.12446 20.1064 8.73663 20.2518C8.34879 20.3973 8.15231 20.8296 8.29777 21.2175L9.70223 20.6907ZM19.2803 7.07178L19.3571 7.25473L20.7402 6.67416L20.6634 6.4912L19.2803 7.07178ZM16.2216 4.16347L16.3889 4.23031L16.9456 2.83745L16.7784 2.77061L16.2216 4.16347ZM20.6634 6.4912C19.9638 4.82468 18.6244 3.50849 16.9456 2.83745L16.3889 4.23031C17.6948 4.7523 18.7364 5.77599 19.2803 7.07178L20.6634 6.4912ZM3.38526 6.4912L3.30846 6.67416L4.69154 7.25473L4.76834 7.07178L3.38526 6.4912ZM7.27028 2.77061L7.10305 2.83745L7.65979 4.23031L7.82701 4.16347L7.27028 2.77061ZM4.76834 7.07178C5.31227 5.77599 6.35384 4.7523 7.65979 4.23031L7.10305 2.83745C5.4242 3.50849 4.08481 4.82468 3.38526 6.4912L4.76834 7.07178ZM17.7772 18.2056H6.22281V19.7056H17.7772V18.2056ZM17.4943 10.0221L17.9415 13.9592L19.4319 13.7899L18.9847 9.85279L17.4943 10.0221ZM6.05849 13.9592L6.50567 10.0221L5.01526 9.85279L4.56807 13.7899L6.05849 13.9592ZM5.01872 16.3164C5.59608 15.6386 5.96025 14.8241 6.05849 13.9592L4.56807 13.7899C4.50522 14.3432 4.2708 14.8812 3.87686 15.3436L5.01872 16.3164ZM17.9415 13.9592C18.0398 14.8241 18.4039 15.6386 18.9813 16.3164L20.1231 15.3436C19.7292 14.8812 19.4948 14.3432 19.4319 13.7899L17.9415 13.9592ZM6.22281 18.2056C5.5675 18.2056 5.10418 17.8817 4.89044 17.5053C4.68417 17.1421 4.68715 16.7056 5.01872 16.3164L3.87686 15.3436C3.11139 16.2422 3.0877 17.3685 3.5861 18.2461C4.07704 19.1105 5.04975 19.7056 6.22281 19.7056V18.2056ZM17.7772 19.7056C18.9503 19.7056 19.923 19.1105 20.4139 18.2461C20.9123 17.3685 20.8886 16.2422 20.1231 15.3436L18.9813 16.3164C19.3129 16.7056 19.3158 17.1421 19.1096 17.5053C18.8958 17.8817 18.4325 18.2056 17.7772 18.2056V19.7056ZM15.0199 5.33931V5.23567H13.5199V5.33931H15.0199ZM18.9847 9.85279C18.7054 7.39374 16.8802 5.43969 14.5127 4.6297L14.0272 6.04893C15.9445 6.70491 17.2914 8.23516 17.4943 10.0221L18.9847 9.85279ZM10.4801 5.33931V5.23567H8.98005V5.33931H10.4801ZM6.50567 10.0221C6.70863 8.23516 8.05551 6.70491 9.97284 6.04893L9.48727 4.6297C7.1198 5.43969 5.29456 7.39374 5.01526 9.85279L6.50567 10.0221ZM12 3.71741C12.84 3.71741 13.5199 4.39768 13.5199 5.23567H15.0199C15.0199 3.56821 13.6673 2.21741 12 2.21741V3.71741ZM12 2.21741C10.3327 2.21741 8.98005 3.56821 8.98005 5.23567H10.4801C10.4801 4.39768 11.16 3.71741 12 3.71741V2.21741ZM14.2978 20.6907C13.9752 21.5508 13.0849 22.2026 12 22.2026V23.7026C13.6851 23.7026 15.1514 22.686 15.7022 21.2175L14.2978 20.6907ZM12 22.2026C10.9151 22.2026 10.0248 21.5508 9.70223 20.6907L8.29777 21.2175C8.84856 22.686 10.3149 23.7026 12 23.7026V22.2026Z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </span>
+            </button>
+            <div
+              class="css-r6z5ec"
+              style="visibility: hidden; position: absolute; min-width: max-content; inset: 0 auto auto 0;"
+            >
+              <div
+                aria-orientation="vertical"
+                class="chakra-menu__menu-list css-21cpnl"
+                id="menu-list-:r5:"
+                role="menu"
+                style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8) translateZ(0);"
+                tabindex="-1"
+              >
+                <p
+                  class="chakra-text css-43jxxd"
+                >
+                  Notifications
+                </p>
+                <div
+                  class="css-xrv81f"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="css-1ve4u7y"
+            data-testid="icon-button-component"
+          >
+            <div
+              aria-label="email-content"
+              class="chakra-button css-8s8ddv"
+              data-testid="icon-button"
+              role="button"
+            >
+              <svg
+                fill="none"
+                height="24"
+                stroke="#1A202C"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M2 12V7C2 4.79086 3.79086 3 6 3H18C20.2091 3 22 4.79086 22 7V17C22 19.2091 20.2091 21 18 21H8M6 8L9.7812 10.5208C11.1248 11.4165 12.8752 11.4165 14.2188 10.5208L18 8M2 15H8M2 18H8"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </div>
+          </div>
+          <button
+            aria-controls="menu-list-:r7:"
+            aria-expanded="false"
+            aria-haspopup="menu"
+            class="chakra-menu__menu-button"
+            id="menu-button-:r7:"
+          >
+            <span
+              class="css-xl71ch"
+            >
+              <div
+                class="css-1ve4u7y"
+                data-testid="icon-button-component"
+              >
+                <p
+                  class="chakra-text css-1gcq9kx"
+                >
+                  10
+                </p>
+                <div
+                  aria-label="limit-bonus"
+                  class="chakra-button css-8s8ddv"
+                  data-testid="icon-button"
+                  role="button"
+                >
+                  <svg
+                    fill="none"
+                    height="24"
+                    stroke="#1A202C"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M4 11H20M4 11C2.89543 11 2 10.1046 2 9V8C2 6.89543 2.89543 6 4 6H20C21.1046 6 22 6.89543 22 8V9C22 10.1046 21.1046 11 20 11M4 11L4 20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V11M12 6H16C17.1046 6 18 5.10457 18 4C18 2.89543 17.1046 2 16 2C13.7909 2 12 3.79086 12 6ZM12 6H8C6.89543 6 6 5.10457 6 4C6 2.89543 6.89543 2 8 2C10.2091 2 12 3.79086 12 6ZM12 6V22"
+                      stroke-linecap="round"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </span>
+          </button>
+          <div
+            class="css-r6z5ec"
+            style="visibility: hidden; position: absolute; min-width: max-content; inset: 0 auto auto 0;"
+          >
+            <div
+              aria-orientation="vertical"
+              class="chakra-menu__menu-list css-12anmev"
+              id="menu-list-:r7:"
+              role="menu"
+              style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8) translateZ(0);"
+              tabindex="-1"
+            >
+              <div
+                class="css-z4dayy"
+              >
+                <h3
+                  class="chakra-text css-pgott3"
+                >
+                  60
+                  % Bonus
+                </h3>
+                <p
+                  class="chakra-text css-1kzgd7p"
+                >
+                  Create an Account and Get Bonus
+                </p>
+                <div
+                  class="css-174qtmr"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="css-m6awie"
+        >
+          <div
+            class="css-0"
+          >
+            <button
+              aria-controls="menu-list-:r9:"
+              aria-expanded="false"
+              aria-haspopup="menu"
+              class="chakra-button chakra-menu__menu-button css-1of25bg"
+              id="menu-button-:r9:"
+              title="Abdur Rohman"
+              type="button"
+            >
+              <span
+                class="css-xl71ch"
+              >
+                <div
+                  class="css-70qvj9"
+                >
+                  <div
+                    class="css-1t7qp8j"
+                  >
+                    <img
+                      alt=""
+                      data-nimg="fill"
+                      decoding="async"
+                      loading="lazy"
+                      sizes="100vw"
+                      src="/_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=3840&q=75"
+                      srcset="/_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=3840&q=75 3840w"
+                      style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; object-fit: cover; color: transparent; border-radius: 12px; border-width: 1px; padding-top: 2px; cursor: pointer; border-color: #e2e8f0; background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;"
+                    />
+                  </div>
+                  <div
+                    class="css-1unxso2"
+                  >
+                    <div
+                      class="css-1f25a08"
+                    >
+                      <div
+                        class="css-70qvj9"
+                      >
+                        <p
+                          class="chakra-text css-9sqk9o"
+                        >
+                          Abdur Rohman
+                        </p>
+                        <svg
+                          fill="none"
+                          height="24"
+                          stroke="#1A202C"
+                          style="transform: rotate(undefined);"
+                          viewBox="0 0 24 24"
+                          width="24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M7 10L12 14L17 10"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                          />
+                        </svg>
+                      </div>
+                      <p
+                        class="chakra-text css-179zs4q"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </span>
+            </button>
+            <div
+              class="css-lnyvlk"
+              style="visibility: hidden; position: absolute; min-width: max-content; inset: 0 auto auto 0;"
+            >
+              <div
+                aria-orientation="vertical"
+                class="chakra-menu__menu-list css-16j8xku"
+                data-testid="TestDropdown"
+                id="menu-list-:r9:"
+                role="menu"
+                style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8) translateZ(0);"
+                tabindex="-1"
+              >
+                <a
+                  aria-label="menu-icon-My profile"
+                  class="chakra-link chakra-menu__menuitem css-1y28nxo"
+                  data-index="0"
+                  href="/settings"
+                  id="menu-list-:r9:-menuitem-:ra:"
+                  role="menuitem"
+                  tabindex="-1"
+                >
+                  <div
+                    class="css-k008qs"
+                  >
+                    <svg
+                      fill="none"
+                      height="24"
+                      stroke="#1A202C"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12.1197 12.7805C12.0497 12.7705 11.9597 12.7705 11.8797 12.7805C10.1197 12.7205 8.71973 11.2805 8.71973 9.51047C8.71973 7.70047 10.1797 6.23047 11.9997 6.23047C13.8097 6.23047 15.2797 7.70047 15.2797 9.51047C15.2697 11.2805 13.8797 12.7205 12.1197 12.7805Z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                      />
+                      <path
+                        d="M18.7398 19.3796C16.9598 21.0096 14.5998 21.9996 11.9998 21.9996C9.39977 21.9996 7.03977 21.0096 5.25977 19.3796C5.35977 18.4396 5.95977 17.5196 7.02977 16.7996C9.76977 14.9796 14.2498 14.9796 16.9698 16.7996C18.0398 17.5196 18.6398 18.4396 18.7398 19.3796Z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                      />
+                      <path
+                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                      />
+                    </svg>
+                    <p
+                      class="chakra-text css-1c1tqaz"
+                    >
+                      My profile
+                    </p>
+                  </div>
+                </a>
+                <hr
+                  aria-orientation="horizontal"
+                  class="chakra-divider css-1sulk9x"
+                />
+                <button
+                  aria-label="menu-icon-Logout"
+                  class="chakra-menu__menuitem css-1gjvndh"
+                  data-index="1"
+                  id="menu-list-:r9:-menuitem-:rb:"
+                  role="menuitem"
+                  tabindex="-1"
+                  type="button"
+                >
+                  <div
+                    class="css-k008qs"
+                  >
+                    <svg
+                      fill="none"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M15 10L13.7071 11.2929C13.3166 11.6834 13.3166 12.3166 13.7071 12.7071L15 14M14 12L22 12M6 20C3.79086 20 2 18.2091 2 16V8C2 5.79086 3.79086 4 6 4M6 20C8.20914 20 10 18.2091 10 16V8C10 5.79086 8.20914 4 6 4M6 20H14C16.2091 20 18 18.2091 18 16M6 4H14C16.2091 4 18 5.79086 18 8"
+                        stroke="#1A202C"
+                        stroke-linecap="round"
+                        stroke-width="1.5"
+                      />
+                    </svg>
+                    <p
+                      class="chakra-text css-1c1tqaz"
+                    >
+                      Logout
+                    </p>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-bbnr2e"
+      >
+        <div
+          class="css-0"
+        >
+          <button
+            aria-controls="menu-list-:rd:"
+            aria-expanded="false"
+            aria-haspopup="menu"
+            class="chakra-button chakra-menu__menu-button css-1of25bg"
+            id="menu-button-:rd:"
+            title="Abdur Rohman"
+            type="button"
+          >
+            <span
+              class="css-xl71ch"
+            >
+              <div
+                class="css-70qvj9"
+              >
+                <div
+                  class="css-1t7qp8j"
+                >
+                  <img
+                    alt=""
+                    data-nimg="fill"
+                    decoding="async"
+                    loading="lazy"
+                    sizes="100vw"
+                    src="/_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=3840&q=75"
+                    srcset="/_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F5556%2F5556468.png&w=3840&q=75 3840w"
+                    style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; object-fit: cover; color: transparent; border-radius: 12px; border-width: 1px; padding-top: 2px; cursor: pointer; border-color: #e2e8f0; background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;"
+                  />
+                </div>
+                <div
+                  class="css-1unxso2"
+                >
+                  <div
+                    class="css-1f25a08"
+                  >
+                    <div
+                      class="css-70qvj9"
+                    >
+                      <p
+                        class="chakra-text css-9sqk9o"
+                      >
+                        Abdur Rohman
+                      </p>
+                      <svg
+                        fill="none"
+                        height="24"
+                        stroke="#1A202C"
+                        style="transform: rotate(undefined);"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7 10L12 14L17 10"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                        />
+                      </svg>
+                    </div>
+                    <p
+                      class="chakra-text css-179zs4q"
+                    />
+                  </div>
+                </div>
+              </div>
+            </span>
+          </button>
+          <div
+            class="css-lnyvlk"
+            style="visibility: hidden; position: absolute; min-width: max-content; inset: 0 auto auto 0;"
+          >
+            <div
+              aria-orientation="vertical"
+              class="chakra-menu__menu-list css-16j8xku"
+              data-testid="TestDropdown"
+              id="menu-list-:rd:"
+              role="menu"
+              style="transform-origin: var(--popper-transform-origin); opacity: 0; visibility: hidden; transform: scale(0.8) translateZ(0);"
+              tabindex="-1"
+            >
+              <a
+                aria-label="menu-icon-My profile"
+                class="chakra-link chakra-menu__menuitem css-1y28nxo"
+                data-index="0"
+                href="/settings"
+                id="menu-list-:rd:-menuitem-:re:"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <div
+                  class="css-k008qs"
+                >
+                  <svg
+                    fill="none"
+                    height="24"
+                    stroke="#1A202C"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.1197 12.7805C12.0497 12.7705 11.9597 12.7705 11.8797 12.7805C10.1197 12.7205 8.71973 11.2805 8.71973 9.51047C8.71973 7.70047 10.1797 6.23047 11.9997 6.23047C13.8097 6.23047 15.2797 7.70047 15.2797 9.51047C15.2697 11.2805 13.8797 12.7205 12.1197 12.7805Z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      d="M18.7398 19.3796C16.9598 21.0096 14.5998 21.9996 11.9998 21.9996C9.39977 21.9996 7.03977 21.0096 5.25977 19.3796C5.35977 18.4396 5.95977 17.5196 7.02977 16.7996C9.76977 14.9796 14.2498 14.9796 16.9698 16.7996C18.0398 17.5196 18.6398 18.4396 18.7398 19.3796Z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                  <p
+                    class="chakra-text css-1c1tqaz"
+                  >
+                    My profile
+                  </p>
+                </div>
+              </a>
+              <hr
+                aria-orientation="horizontal"
+                class="chakra-divider css-1sulk9x"
+              />
+              <button
+                aria-label="menu-icon-Logout"
+                class="chakra-menu__menuitem css-1gjvndh"
+                data-index="1"
+                id="menu-list-:rd:-menuitem-:rf:"
+                role="menuitem"
+                tabindex="-1"
+                type="button"
+              >
+                <div
+                  class="css-k008qs"
+                >
+                  <svg
+                    fill="none"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15 10L13.7071 11.2929C13.3166 11.6834 13.3166 12.3166 13.7071 12.7071L15 14M14 12L22 12M6 20C3.79086 20 2 18.2091 2 16V8C2 5.79086 3.79086 4 6 4M6 20C8.20914 20 10 18.2091 10 16V8C10 5.79086 8.20914 4 6 4M6 20H14C16.2091 20 18 18.2091 18 16M6 4H14C16.2091 4 18 5.79086 18 8"
+                      stroke="#1A202C"
+                      stroke-linecap="round"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                  <p
+                    class="chakra-text css-1c1tqaz"
+                  >
+                    Logout
+                  </p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;
+
 exports[`Header render Should render match with snapshot. 1`] = `
 <div>
   <div
