@@ -2,11 +2,11 @@
 import { memo } from 'react';
 import { Flex, Td, Text, Tooltip } from '@chakra-ui/react';
 
-interface Props {
+interface NameCellProps {
   name: string;
 }
 
-const NameCell = ({ name }: Props): JSX.Element => (
+const NameCell = ({ name }: NameCellProps): JSX.Element => (
   <Td
     py={5}
     pr={5}
@@ -18,11 +18,7 @@ const NameCell = ({ name }: Props): JSX.Element => (
     w={{ base: 200, xl: 220, '3xl': 200, '6xl': 250 }}
   >
     <Flex alignItems="center" gap="10px">
-      <Tooltip
-        minW="max-content"
-        placement="bottom-start"
-        label={name as string}
-      >
+      <Tooltip minW="max-content" placement="bottom-start" label={name}>
         <Text
           display="block"
           fontSize="md"
@@ -34,7 +30,7 @@ const NameCell = ({ name }: Props): JSX.Element => (
           flex={1}
           w={{ base: 200, xl: 220, '3xl': 200, '6xl': 250 }}
         >
-          {name as string}
+          {name}
         </Text>
       </Tooltip>
     </Flex>

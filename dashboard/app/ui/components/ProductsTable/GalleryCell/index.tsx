@@ -10,12 +10,15 @@ import { IMAGES } from '@/lib/constants';
 // Utils
 import { generatePlaceholder } from '@/lib/utils';
 
-interface Props {
-  imageURLs?: string[];
+interface GalleryCellProps {
+  imageURL?: string;
   name: string;
 }
 
-const GalleryCell = ({ imageURLs = [], name }: Props) => (
+const GalleryCell = ({
+  imageURL = IMAGES.SIGN_UP.url,
+  name,
+}: GalleryCellProps) => (
   <Td
     py={5}
     pr={5}
@@ -35,7 +38,7 @@ const GalleryCell = ({ imageURLs = [], name }: Props) => (
     >
       <Box pos="relative" w={{ base: 50, lg: 100 }} h={{ base: 50, lg: 100 }}>
         <Image
-          src={imageURLs.toString() || IMAGES.SIGN_UP.url}
+          src={imageURL}
           alt={`Image of ${name}`}
           fill
           sizes="100vw"

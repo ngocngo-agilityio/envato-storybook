@@ -2,11 +2,11 @@
 import { memo } from 'react';
 import { Text, Td } from '@chakra-ui/react';
 
-interface Props {
+interface PriceCellProps {
   price: number;
 }
 
-const PriceCell = ({ price }: Props) => (
+const PriceCell = ({ price }: PriceCellProps) => (
   <Td
     py={5}
     pr={5}

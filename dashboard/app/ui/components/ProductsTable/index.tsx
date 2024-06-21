@@ -240,12 +240,11 @@ const ProductsTable = () => {
     [],
   );
 
-  const renderGallery = useCallback(
-    ({ imageURLs, name }: TProduct) => (
-      <GalleryCell imageURLs={imageURLs} name={name} />
-    ),
-    [],
-  );
+  const renderGallery = useCallback(({ imageURLs, name }: TProduct) => {
+    const imageURL = imageURLs[0];
+
+    return <GalleryCell imageURL={imageURL} name={name} />;
+  }, []);
 
   const renderPrice = useCallback(
     ({ amount }: TProduct) => <PriceCell price={amount} />,

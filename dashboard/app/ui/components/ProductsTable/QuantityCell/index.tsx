@@ -2,11 +2,11 @@
 import { memo } from 'react';
 import { Text, Td } from '@chakra-ui/react';
 
-interface Props {
+interface QuantityCellProps {
   quantity: number;
 }
 
-const QuantityCell = ({ quantity }: Props) => (
+const QuantityCell = ({ quantity }: QuantityCellProps) => (
   <Td
     py={5}
     pr={5}
