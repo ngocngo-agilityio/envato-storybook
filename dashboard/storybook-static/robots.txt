@@ -1,0 +1,7 @@
+user-agent: *
+disallow: /downloads/
+
+user-agent: magicsearchbot
+disallow: /uploads/
+
+sitemap: https://envato-market-one.vercel.app/sitemap-file.xml
