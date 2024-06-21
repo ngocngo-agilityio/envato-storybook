@@ -149,8 +149,8 @@ export const COLUMNS_PRODUCTS = (
 
 export const COLUMNS_RECENT_ACTIVITIES = (
   onRenderHead: (title: string, key: TActivitiesSortField) => void,
-  onRenderBody: ({ id, actionName }: TDataSource) => void,
-  onRenderName: (actionName: TRecentActivities) => void,
+  onRenderBody: ({ _id }: TRecentActivities) => void,
+  onRenderName: ({ actionName }: TRecentActivities) => void,
   onRenderEmail: (email: TRecentActivities) => void,
 ) => [
   {
