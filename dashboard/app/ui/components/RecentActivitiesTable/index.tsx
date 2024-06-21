@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Flex, Td, Text, Th, Tooltip } from '@chakra-ui/react';
+import { Box, Flex, Td, Text, Tooltip } from '@chakra-ui/react';
 import { memo, useCallback, useMemo, useState } from 'react';
 import Link from 'next/link';
 
@@ -23,12 +23,7 @@ import {
 } from '@/lib/constants';
 
 // hooks
-import {
-  TActivitiesSortField,
-  useDebounce,
-  useRecentActivities,
-  useSearch,
-} from '@/lib/hooks';
+import { useDebounce, useRecentActivities, useSearch } from '@/lib/hooks';
 
 // Utils
 import {
@@ -37,7 +32,12 @@ import {
 } from '@/lib/utils';
 
 // Interfaces
-import { TDataSource, THeaderTable, TRecentActivities } from '@/lib/interfaces';
+import {
+  TActivitiesSortField,
+  TDataSource,
+  THeaderTable,
+  TRecentActivities,
+} from '@/lib/interfaces';
 
 const RecentActivitiesTable = () => {
   const { get, setSearchParam: setSearchTransaction } = useSearch();
@@ -93,17 +93,10 @@ const RecentActivitiesTable = () => {
   );
 
   const renderHead = useCallback(
-    (title: string, key: string): JSX.Element => {
-      const handleClick = () => {
-        sortBy && sortBy(key as TActivitiesSortField);
-      };
+    (title: string, key: TActivitiesSortField): JSX.Element => (
+      <HeadCell columnKey={key} title={title} onSort={sortBy} />
+    ),
 
-      return title ? (
-        <HeadCell key={title} title={title} onClick={handleClick} />
-      ) : (
-        <Th w={50} maxW={50} />
-      );
-    },
     [sortBy],
   );
 
