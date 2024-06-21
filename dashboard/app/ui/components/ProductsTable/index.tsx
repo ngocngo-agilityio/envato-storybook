@@ -51,9 +51,9 @@ import {
   Button,
   ProductForm,
   Indicator,
+  HeadCell,
 } from '@/ui/components';
 import { TOption } from '../common/Select';
-import HeaderCell from './HeaderCell';
 import GalleryCell from './GalleryCell';
 import PriceCell from './PriceCell';
 import QuantityCell from './QuantityCell';
@@ -230,7 +230,7 @@ const ProductsTable = () => {
 
   const renderHead = useCallback(
     (title: string, key: TProductSortField): JSX.Element => (
-      <HeaderCell title={title} sortedField={key} onSort={sortBy} />
+      <HeadCell title={title} columnKey={key} onSort={sortBy} />
     ),
     [sortBy],
   );

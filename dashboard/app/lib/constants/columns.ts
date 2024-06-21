@@ -1,15 +1,17 @@
 // Types
 import {
+  TActivitiesSortField,
   TDataSource,
   TProduct,
   TProductResponse,
   TProductSortField,
   TRecentActivities,
   TTransaction,
+  TTransactionSortField,
 } from '../interfaces';
 
 export const COLUMNS_DASHBOARD = (
-  onRenderHead: (title: string, key: string) => void,
+  onRenderHead: (title: string, key: TTransactionSortField) => void,
   onRenderBody: ({ id, image, name }: TDataSource) => void,
   onRenderEmail: (email: TTransaction) => void,
   onRenderLocation: (location: TTransaction) => void,
@@ -56,7 +58,7 @@ export const COLUMNS_DASHBOARD = (
 ];
 
 export const COLUMNS_HISTORY = (
-  renderHead: (title: string, key: string) => void,
+  renderHead: (title: string, key: TTransactionSortField) => void,
   renderBody: ({ id, image, name }: TDataSource) => void,
   renderPaymentStatus: ({ paymentStatus }: TDataSource) => void,
   renderTransactionStatus: ({ paymentStatus }: TDataSource) => void,
@@ -146,7 +148,7 @@ export const COLUMNS_PRODUCTS = (
 ];
 
 export const COLUMNS_RECENT_ACTIVITIES = (
-  onRenderHead: (title: string, key: string) => void,
+  onRenderHead: (title: string, key: TActivitiesSortField) => void,
   onRenderBody: ({ id, actionName }: TDataSource) => void,
   onRenderName: (actionName: TRecentActivities) => void,
   onRenderEmail: (email: TRecentActivities) => void,
