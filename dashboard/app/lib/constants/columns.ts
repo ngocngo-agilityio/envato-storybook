@@ -3,6 +3,7 @@ import {
   TDataSource,
   TProduct,
   TProductResponse,
+  TProductSortField,
   TRecentActivities,
   TTransaction,
 } from '../interfaces';
@@ -93,12 +94,12 @@ export const COLUMNS_HISTORY = (
 ];
 
 export const COLUMNS_PRODUCTS = (
-  onRenderHead: (title: string, key: string) => void,
-  onRenderBody: ({ id, name }: TDataSource) => void,
+  onRenderHead: (title: string, key: TProductSortField) => void,
+  onRenderBody: ({ name }: TProduct) => void,
   onRenderGallery: ({ imageURLs, name }: TProduct) => void,
   onRenderPrice: (amount: TProduct) => void,
-  onRenderStatus: (productStatus: TDataSource) => void,
-  onRenderQuantity: (stock: TProduct) => void,
+  onRenderStatus: ({ productStatus }: TProduct) => void,
+  onRenderQuantity: ({ stock }: TProduct) => void,
   onRenderActionIcon: (data: TProductResponse) => void,
 ) => [
   {

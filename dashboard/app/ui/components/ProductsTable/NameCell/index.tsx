@@ -1,10 +1,12 @@
-import { Flex, Td, Text, Tooltip } from '@chakra-ui/react';
+// Libs
 import { memo } from 'react';
+import { Flex, Td, Text, Tooltip } from '@chakra-ui/react';
 
-// Types
-import { TDataSource } from '@/lib/interfaces';
+interface Props {
+  name: string;
+}
 
-const ProductNameCellComponent = ({ name }: TDataSource): JSX.Element => (
+const NameCell = ({ name }: Props): JSX.Element => (
   <Td
     py={5}
     pr={5}
@@ -39,6 +41,6 @@ const ProductNameCellComponent = ({ name }: TDataSource): JSX.Element => (
   </Td>
 );
 
-const ProductNameCell = memo(ProductNameCellComponent);
+const NameCellMemorized = memo(NameCell);
 
-export default ProductNameCell;
+export default NameCellMemorized;
